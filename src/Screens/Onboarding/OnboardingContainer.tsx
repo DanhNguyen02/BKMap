@@ -16,5 +16,5 @@ export const OnboardingContainer = ({
     navigation.navigate(screen);
   };
 
-  return <Onboarding/>;
+  return <Onboarding onNavigate={onNavigate} />;
 };
