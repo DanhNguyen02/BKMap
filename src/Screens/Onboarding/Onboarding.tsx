@@ -58,8 +58,7 @@ export const Onboarding = (props: {
 
       {item.id === 3 ? (
         <Button
-          h="16"
-          w="40"
+          w="48"
           backgroundColor={"#22668D"}
           borderRadius={24}
           onPress={() => props.onNavigate(RootScreens.MAIN)}
@@ -70,8 +69,7 @@ export const Onboarding = (props: {
         </Button>
       ) : (
         <Button
-          h="16"
-          w="40"
+          w="48"
           backgroundColor={"#22668D"}
           borderRadius={24}
           onPress={() => gotoNextPage()}
@@ -104,14 +102,15 @@ export const Onboarding = (props: {
         data={slides}
         expandingDotWidth={30}
         scrollX={scrollX}
-        inActiveDotOpacity={0.6}
+        inActiveDotOpacity={0.5}
         dotStyle={{
           width: 10,
           height: 10,
-          backgroundColor: "#22668D",
           borderRadius: 5,
           marginHorizontal: 5,
         }}
+        activeDotColor="#22668D"
+        inActiveDotColor="#22668D"
         containerStyle={{
           bottom: 30,
         }}
