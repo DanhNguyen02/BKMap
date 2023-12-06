@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Expo Redux Template",
+    "name": "BK Map",
     "slug": "expo-redux-template",
     "version": "1.1.0",
     "orientation": "portrait",
@@ -35,6 +35,11 @@
     "plugins": [],
     "runtimeVersion": {
       "policy": "sdkVersion"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "1581ac5b-fc4a-4740-b65b-cc6c00861669"
+      }
     }
   }
 }
