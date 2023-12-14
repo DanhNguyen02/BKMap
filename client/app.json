@@ -13,7 +13,7 @@
     },
     "updates": {
       "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/82716b8e-2818-4161-8a88-c571df4369a5"
+      "url": "https://u.expo.dev/90e2bdfa-33b1-48f1-b760-c6e8c9365cac"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -35,9 +35,9 @@
       "policy": "sdkVersion"
     },
     "extra": {
-      // "eas": {
-      //   "projectId": "1581ac5b-fc4a-4740-b65b-cc6c00861669"
-      // }
+      "eas": {
+        "projectId": "90e2bdfa-33b1-48f1-b760-c6e8c9365cac"
+      }
     }
   }
 }
