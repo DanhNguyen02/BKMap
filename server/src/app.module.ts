@@ -13,12 +13,12 @@ import { RoomModule } from './room/room.module';
     //   envFilePath: '.env',
     //   isGlobal: true
     // }),
-    // // MongooseModule.forRoot(process.env.DB_URL),
+    MongooseModule.forRoot('mongodb+srv://danhnguyenhuu:bkmap@bkmap.k2itw9f.mongodb.net/?retryWrites=true&w=majority'),
     // MongooseModule.forRootAsync({
     //   imports: [ConfigModule],
     //   inject: [ConfigService],
     //   useFactory: async (config: ConfigService) => ({
-    //     uri: config.get<string>('MONGO_URL'), // Loaded from .ENV
+    //     uri: 'mongodb+srv://danhnguyenhuu:bkmap@bkmap.k2itw9f.mongodb.net/?retryWrites=true&w=majority', // Loaded from .ENV
     //   }),
     // }),
     UserModule,

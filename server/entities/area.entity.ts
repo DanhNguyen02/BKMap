@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Room } from "./room.entity";
 import { Comment } from "./comment.entity";
+import { SchemaFactory } from "@nestjs/mongoose";
 
 export class Area {
   @ApiProperty({
@@ -45,3 +46,5 @@ export class Area {
   })
   comments: [Comment];
 }
+
+export const AreaSchema = SchemaFactory.createForClass(Area);
