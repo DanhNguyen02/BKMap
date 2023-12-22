@@ -4,9 +4,9 @@ import { HomeContainer } from "@/Screens/Home";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Button, View } from "native-base";
 import Map from "@/Screens/Map/Map";
-import Explore from "@/Screens/Explore/Explore";
+import { ExploreStack } from "@/Screens/Explore/ExploreStack";
 import Profile from "@/Screens/Profile/Profile";
-import QRScan from "@/Screens/QRScan/QRScan";
+import { QRStack } from "@/Screens/QRScan/QRStack";
 const Tab = createBottomTabNavigator();
 
 // @refresh reset
@@ -46,7 +46,7 @@ export const MainNavigator = () => {
       })}
     >
       <Tab.Screen name="Home" component={HomeContainer} />
-      <Tab.Screen name="Explore" component={Explore} />
+      <Tab.Screen name="Explore" component={ExploreStack} />
       <Tab.Screen
         name="Add"
         options={{
@@ -70,7 +70,7 @@ export const MainNavigator = () => {
             </View>
           ),
         }}
-        component={QRScan}
+        component={QRStack}
         // children={() => <QRScan navigation={navigation} />}
       />
       <Tab.Screen name="Location" component={Map} />

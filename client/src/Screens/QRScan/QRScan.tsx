@@ -12,7 +12,10 @@ import {
   Alert,
 } from "react-native";
 import Modal from "react-native-modal";
+import { Camera } from "expo-camera";
 import { RootScreens } from "..";
+import { TData } from "../Explore/PlaceDetail";
+import { Area } from "../../../mock/area";
 const QRScan: React.FC<{}> = ({}) => {
   const navigation: NavigationProp<any> = useNavigation();
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
@@ -22,27 +25,34 @@ const QRScan: React.FC<{}> = ({}) => {
     setModalVisible(!isModalVisible);
   };
   useEffect(() => {
-    const getBarCodeScannerPermissions = async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === "granted");
-    };
+    const unsubscribe = navigation.addListener("focus", () => {
+      // do something - for example: reset states, ask for camera permission
+      setScanned(false);
+      setHasPermission(false);
+      (async () => {
+        const { status } = await BarCodeScanner.requestPermissionsAsync();
+        setHasPermission(status === "granted");
+      })();
+    });
 
-    getBarCodeScannerPermissions();
-  }, []);
-  const connect = () => {
-    console.log("run here");
-    // onNavigate(RootScreens.MAIN);
-    Alert.alert("Alert Title", "My Alert Msg", [
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
+  }, [navigation]);
+  const connect = (data: string) => {
+    data = data.substring(data.indexOf(":") + 1);
+    const buildingInfo: TData = Area[Number(data) - 1];
+    // console.log(buildingInfo);
+    Alert.alert("Kết quả", `Đây là ${buildingInfo.name}`, [
       {
-        text: "Ask me later",
-        onPress: () => navigation.navigate("Home"),
+        text: "Tìm hiểu thông tin về tòa nhà",
+        onPress: () =>
+          navigation.navigate("PlaceDetail", { buildingInfo: buildingInfo }),
       },
-      { text: "OK", onPress: () => console.log("OK Pressed") },
     ]);
   };
   const handleBarCodeScanned = ({ data }: { data: string }) => {
     setScanned(true);
-    connect();
+    connect(data);
   };
 
   if (hasPermission === null) {
@@ -54,29 +64,25 @@ const QRScan: React.FC<{}> = ({}) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.cameraContainer}>
-        <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={styles.camera}
-        />
-      </View>
-      {scanned && (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            setScanned(false);
-            toggleModal();
-          }}
-        >
-          <HStack space="2">
-            <Image
-              style={styles.erricon}
-              source={require("../../../assets/images/QRScan/qr.png")}
-            />
-            <Text style={styles.buttonText}>Scan QR code</Text>
-          </HStack>
-        </TouchableOpacity>
-      )}
+      <Camera
+        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        style={StyleSheet.absoluteFillObject}
+      />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          setScanned(false);
+          toggleModal();
+        }}
+      >
+        <HStack space="2">
+          <Image
+            style={styles.erricon}
+            source={require("../../../assets/images/QRScan/qr.png")}
+          />
+          <Text style={styles.buttonText}>Scan QR code</Text>
+        </HStack>
+      </TouchableOpacity>
       <Modal isVisible={isModalVisible}>
         <TouchableWithoutFeedback onPress={() => toggleModal()}>
           <View style={styles.error}>
@@ -103,7 +109,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     alignItems: "center",
-    justifyContent: "center",
   },
   title: {
     fontSize: 24,
@@ -116,17 +121,21 @@ const styles = StyleSheet.create({
   },
   cameraContainer: {
     width: "100%",
-    aspectRatio: 0.8,
+    aspectRatio: 1,
     paddingBottom: 40,
+    position: "absolute",
+    top: Dimensions.get("screen").height / 7,
   },
   camera: {
-    flex: 1,
+    aspectRatio: 1,
   },
   button: {
     alignItems: "center",
     backgroundColor: "#22668D",
     padding: 10,
+    position: "absolute",
     borderRadius: 20,
+    bottom: Dimensions.get("window").height / 7,
   },
   buttonText: {
     color: "white",

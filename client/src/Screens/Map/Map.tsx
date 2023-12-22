@@ -1,6 +1,7 @@
-import { View, Text } from "native-base";
+import { View, Text, Modal } from "native-base";
 import MapView, { Marker } from "react-native-maps";
 import React, { useEffect, useState } from "react";
+import BuildingMarker from "./Marker";
 const initialRegion = {
   latitude: 10.77278,
   longitude: 106.65972,
@@ -22,6 +23,15 @@ const Map = () => {
         }
       );
   }, [ref]);
+  const api = {
+    latitude: 10.773238746328245,
+    longitude: 106.65960321447547,
+    id: 1,
+  };
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const showModal = () => {
+    setIsModalVisible(!isModalVisible);
+  };
   return (
     <View>
       <MapView
@@ -30,8 +40,23 @@ const Map = () => {
         showsBuildings={false}
         ref={(ref) => setRef(ref)}
       >
-        {/* <Marker /> */}
+        <Marker
+          style={{ position: "absolute" }}
+          coordinate={{
+            latitude: 10.773238746328245,
+            longitude: 106.65960321447547,
+          }}
+          pinColor="red"
+          onPress={() => showModal()}
+        />
+        {/* <BuildingMarker position={api} /> */}
       </MapView>
+
+      <Modal isOpen={isModalVisible} onClose={() => showModal()}>
+        <View>
+          <Text>hahah</Text>
+        </View>
+      </Modal>
     </View>
   );
 };
