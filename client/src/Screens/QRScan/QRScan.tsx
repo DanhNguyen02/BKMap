@@ -1,9 +1,10 @@
 import { View, Text, Box, HStack } from "native-base";
 import React, { useEffect, useState } from "react";
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { Dimensions, StyleSheet, TouchableOpacity, Image, TouchableHighlight, TouchableWithoutFeedback } from "react-native";
+import { Dimensions, StyleSheet, TouchableOpacity, Image, TouchableWithoutFeedback } from "react-native";
 import Modal from "react-native-modal";
-import { Button } from "react-native";
+import { Camera } from 'expo-camera';
+
 export default function QRScan() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
@@ -34,13 +35,10 @@ export default function QRScan() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.cameraContainer}>
-        <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={styles.camera}
-        />
-      </View>
-      {scanned && 
+      <Camera
+        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        style={StyleSheet.absoluteFillObject}
+      />
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
@@ -53,7 +51,7 @@ export default function QRScan() {
           <Text style={styles.buttonText}>Scan QR code</Text>
         </HStack>
         
-      </TouchableOpacity>}
+      </TouchableOpacity>
       <Modal isVisible={isModalVisible}>
         <TouchableWithoutFeedback onPress={() => toggleModal()}>
         <View style={styles.error}>
@@ -63,7 +61,6 @@ export default function QRScan() {
               <Text style={styles.errorText}
               >Code is not supported. Try another one</Text>
             </Box>
-            
           </HStack>
         </View>
         </TouchableWithoutFeedback>
@@ -77,7 +74,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     alignItems: 'center',
-    justifyContent: 'center',
   },
   title: {
     fontSize: 24,
@@ -90,17 +86,21 @@ const styles = StyleSheet.create({
   },
   cameraContainer: {
     width: '100%',
-    aspectRatio: 0.8,
+    aspectRatio: 1,
     paddingBottom: 40,
+    position: 'absolute',
+    top: Dimensions.get("screen").height/7,
   },
   camera: {
-    flex: 1,
+    aspectRatio: 1,
   },
   button: {
     alignItems: 'center',
     backgroundColor: '#22668D',
     padding: 10,
+    position: 'absolute',
     borderRadius: 20,
+    bottom: Dimensions.get("window").height/7,
   },
   buttonText: {
     color: 'white',
