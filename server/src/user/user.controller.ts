@@ -9,20 +9,20 @@ import { User } from "entities/user.entity";
 export class UserController{
   constructor(private userService: UserService) {}
 
-	@Post()
+	@Post('/signup')
   @ApiOperation({
-    summary: 'User registration',
+    summary: 'User signup',
     description: 'User create new account'
   })
   @ApiResponse({
     status: 200,
     description: 'Create account successfully',
   })
-	logIn(@Body() dto: AccountDto) {
-		return this.userService.getLogin();
+	signUp(@Body() dto: AccountDto) {
+		return this.userService.func(dto);
 	}
 
-	@Post('signup')
+	@Post('login')
   @ApiOperation({
     summary: 'User login',
     description: 'Use account to log in system'
@@ -31,8 +31,8 @@ export class UserController{
     status: 200,
     description: 'Log in successfully'
   })
-	signUp(@Body() dto: AccountDto) {
-		return this.userService.getSignUp();
+	logIn(@Body() dto: AccountDto) {
+		return this.userService.getLogIn();
 	}
 
   @Get('logout/:id')
