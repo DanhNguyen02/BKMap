@@ -1,28 +1,48 @@
-import { View, Text, Box, HStack } from "native-base";
+import { View, Text, Box, HStack, Button } from "native-base";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { BarCodeScanner } from 'expo-barcode-scanner';
-import { Dimensions, StyleSheet, TouchableOpacity, Image, TouchableHighlight, TouchableWithoutFeedback } from "react-native";
+import { BarCodeScanner } from "expo-barcode-scanner";
+import {
+  Dimensions,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
+  Alert,
+} from "react-native";
 import Modal from "react-native-modal";
-import { Button } from "react-native";
-export default function QRScan() {
-  const [hasPermission, setHasPermission] = useState(null);
-  const [scanned, setScanned] = useState(false);
-  const [isModalVisible, setModalVisible] = useState(false);
+import { RootScreens } from "..";
+const QRScan: React.FC<{}> = ({}) => {
+  const navigation: NavigationProp<any> = useNavigation();
+  const [hasPermission, setHasPermission] = useState<boolean | null>(null);
+  const [scanned, setScanned] = useState<boolean>(false);
+  const [isModalVisible, setModalVisible] = useState<boolean>(false);
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
+      setHasPermission(status === "granted");
     };
 
     getBarCodeScannerPermissions();
   }, []);
-
-  const handleBarCodeScanned = ({ data }) => {
+  const connect = () => {
+    console.log("run here");
+    // onNavigate(RootScreens.MAIN);
+    Alert.alert("Alert Title", "My Alert Msg", [
+      {
+        text: "Ask me later",
+        onPress: () => navigation.navigate("Home"),
+      },
+      { text: "OK", onPress: () => console.log("OK Pressed") },
+    ]);
+  };
+  const handleBarCodeScanned = ({ data }: { data: string }) => {
     setScanned(true);
-    alert(`${data}`);
+    connect();
   };
 
   if (hasPermission === null) {
@@ -40,48 +60,54 @@ export default function QRScan() {
           style={styles.camera}
         />
       </View>
-      {scanned && 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          setScanned(false); 
-          toggleModal();
-        }}
-      >
-        <HStack space='2'>
-          <Image style={styles.erricon} source={require('../../../assets/images/QRScan/qr.png')}/>
-          <Text style={styles.buttonText}>Scan QR code</Text>
-        </HStack>
-        
-      </TouchableOpacity>}
+      {scanned && (
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            setScanned(false);
+            toggleModal();
+          }}
+        >
+          <HStack space="2">
+            <Image
+              style={styles.erricon}
+              source={require("../../../assets/images/QRScan/qr.png")}
+            />
+            <Text style={styles.buttonText}>Scan QR code</Text>
+          </HStack>
+        </TouchableOpacity>
+      )}
       <Modal isVisible={isModalVisible}>
         <TouchableWithoutFeedback onPress={() => toggleModal()}>
-        <View style={styles.error}>
-          <HStack space={2}>
-            <Image style={styles.erricon} source={require('../../../assets/images/QRScan/erricon.png')} />
-            <Box style={styles.errorBox}>
-              <Text style={styles.errorText}
-              >Code is not supported. Try another one</Text>
-            </Box>
-            
-          </HStack>
-        </View>
+          <View style={styles.error}>
+            <HStack space={2}>
+              <Image
+                style={styles.erricon}
+                source={require("../../../assets/images/QRScan/erricon.png")}
+              />
+              <Box style={styles.errorBox}>
+                <Text style={styles.errorText}>
+                  Code is not supported. Try another one
+                </Text>
+              </Box>
+            </HStack>
+          </View>
         </TouchableWithoutFeedback>
       </Modal>
     </View>
   );
-}
-
+};
+export default QRScan;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     padding: 10,
   },
   paragraph: {
@@ -89,7 +115,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   cameraContainer: {
-    width: '100%',
+    width: "100%",
     aspectRatio: 0.8,
     paddingBottom: 40,
   },
@@ -97,44 +123,44 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    alignItems: 'center',
-    backgroundColor: '#22668D',
+    alignItems: "center",
+    backgroundColor: "#22668D",
     padding: 10,
     borderRadius: 20,
   },
   buttonText: {
-    color: 'white',
+    color: "white",
     fontSize: 26,
     marginTop: 10,
     padding: 10,
   },
   error: {
-    backgroundColor: '#FFCC70',
-    width: Dimensions.get("window").width/1.3,
-    height: Dimensions.get("window").height/7,
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-    top: Dimensions.get("window").height/2,
-    left: Dimensions.get("window").width/14,
+    backgroundColor: "#FFCC70",
+    width: Dimensions.get("window").width / 1.3,
+    height: Dimensions.get("window").height / 7,
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    top: Dimensions.get("window").height / 2,
+    left: Dimensions.get("window").width / 14,
     borderRadius: 20,
   },
   errorBox: {
     flex: 1,
-    backgroundColor: '#FF9263',
+    backgroundColor: "#FF9263",
     borderRadius: 20,
-    height: Dimensions.get("window").height/7 - 10,
+    height: Dimensions.get("window").height / 7 - 10,
     marginRight: 10,
   },
   errorText: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 12,
     padding: 10,
     marginTop: 10,
-    alignItems: 'center',
+    alignItems: "center",
   },
   erricon: {
     marginTop: 10,
     marginLeft: 10,
-  }
+  },
 });

@@ -30,7 +30,7 @@ const Map = () => {
         showsBuildings={false}
         ref={(ref) => setRef(ref)}
       >
-        <Marker />
+        {/* <Marker /> */}
       </MapView>
     </View>
   );

@@ -30,7 +30,14 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [],
+    "plugins": [
+      [
+        "expo-barcode-scanner",
+        {
+          "cameraPermission": "Allow Samsung A6 to access camera."
+        }
+      ]
+    ],
     "runtimeVersion": {
       "policy": "sdkVersion"
     },

@@ -61,12 +61,6 @@ export const MainNavigator = () => {
               display={"flex"}
               justifyContent={"center"}
               p="3.5"
-              // alignItems={"}
-              // style={{
-              //   backgroundColor: "#22668D",
-              //   bottom: 20,
-              //   borderRadius: 100,
-              // }}
             >
               <MaterialCommunityIcons
                 name="qrcode-scan"
@@ -77,6 +71,7 @@ export const MainNavigator = () => {
           ),
         }}
         component={QRScan}
+        // children={() => <QRScan navigation={navigation} />}
       />
       <Tab.Screen name="Location" component={Map} />
       <Tab.Screen name="Profile" component={Profile} />
