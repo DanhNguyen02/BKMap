@@ -33,6 +33,7 @@
     "react-native": "0.71.14",
     "react-native-animated-pagination-dots": "^0.1.73",
     "react-native-camera": "^4.2.1",
+    "react-native-hide-show-password-input": "^1.2.0",
     "react-native-maps": "^1.8.4",
     "react-native-modal": "^13.0.1",
     "react-native-permissions": "^4.0.1",

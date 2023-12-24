@@ -5,12 +5,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { MainNavigator } from "./Main";
 import { OnboardingContainer } from "@/Screens/Onboarding";
 import { RootScreens } from "@/Screens";
-import PlaceDetail from "@/Screens/Explore/PlaceDetail";
 
 export type RootStackParamList = {
   [RootScreens.MAIN]: undefined;
   [RootScreens.ONBOARDING]: undefined;
-  [RootScreens.PLACEDETAIL]: undefined;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -28,11 +26,6 @@ const ApplicationNavigator = () => {
         <RootStack.Screen
           name={RootScreens.MAIN}
           component={MainNavigator}
-          options={{}}
-        />
-        <RootStack.Screen
-          name={RootScreens.PLACEDETAIL}
-          component={PlaceDetail}
           options={{}}
         />
       </RootStack.Navigator>

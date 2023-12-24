@@ -2,10 +2,8 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { View, Text, ScrollView, Image, HStack, Box } from "native-base";
 import React from "react";
 import { StyleSheet, TextInput, TouchableOpacity } from "react-native";
-export type TData = {
-  id: number;
-  name: string;
-};
+import { TData } from "@/Localization/Type";
+
 const PlaceDetail: React.FC<{ buildingInfo?: TData; route: any }> = ({
   route,
   buildingInfo,
