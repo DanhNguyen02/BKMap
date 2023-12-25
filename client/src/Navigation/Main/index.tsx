@@ -5,8 +5,8 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Button, View } from "native-base";
 import Map from "@/Screens/Map/Map";
 import { ExploreStack } from "@/Screens/Explore/ExploreStack";
-import Profile from "@/Screens/Profile/Profile";
-import QRScan from "@/Screens/QRScan/QRScan";
+import { QRStack } from "@/Screens/QRScan/QRStack";
+import { ProfileStack } from "@/Screens/Profile/ProfileStack";
 const Tab = createBottomTabNavigator();
 
 // @refresh reset
@@ -61,12 +61,6 @@ export const MainNavigator = () => {
               display={"flex"}
               justifyContent={"center"}
               p="3.5"
-              // alignItems={"}
-              // style={{
-              //   backgroundColor: "#22668D",
-              //   bottom: 20,
-              //   borderRadius: 100,
-              // }}
             >
               <MaterialCommunityIcons
                 name="qrcode-scan"
@@ -76,10 +70,11 @@ export const MainNavigator = () => {
             </View>
           ),
         }}
-        component={QRScan}
+        component={QRStack}
+        // children={() => <QRScan navigation={navigation} />}
       />
       <Tab.Screen name="Location" component={Map} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Profile" component={ProfileStack} />
     </Tab.Navigator>
   );
 };

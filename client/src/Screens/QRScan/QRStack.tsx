@@ -1,16 +1,15 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Explore from "./Explore";
-import PlaceDetail from "./PlaceDetail";
-
+import PlaceDetail from "../Explore/PlaceDetail";
+import QRScan from "./QRScan";
 const Stack = createNativeStackNavigator<any>();
 
-export const ExploreStack = () => {
+export const QRStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName="ExploreAll"
+      initialRouteName="QRScan"
       screenOptions={{ headerShown: false }}
     >
-      <Stack.Screen name="ExploreAll" component={Explore} />
+      <Stack.Screen name="QRScan" component={QRScan} />
       <Stack.Screen name="PlaceDetail" component={PlaceDetail} />
     </Stack.Navigator>
   );
