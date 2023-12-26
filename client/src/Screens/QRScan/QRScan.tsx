@@ -14,8 +14,8 @@ import {
 import Modal from "react-native-modal";
 import { Camera } from "expo-camera";
 import { RootScreens } from "..";
-import { TData } from "@/Localization/Type";
-import { Area } from "../../../mock/area";
+import { TBuildingData, TData } from "@/Localization/Type";
+import { buildings } from "../../../assets/data/markercoord";
 const QRScan: React.FC<{}> = ({}) => {
   const navigation: NavigationProp<any> = useNavigation();
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
@@ -40,11 +40,11 @@ const QRScan: React.FC<{}> = ({}) => {
   }, [navigation]);
   const connect = (data: string) => {
     data = data.substring(data.indexOf(":") + 1);
-    const buildingInfo: TData = Area[Number(data) - 1];
+    const buildingInfo: TBuildingData = buildings[Number(data) - 1];
     // console.log(buildingInfo);
-    Alert.alert("Kết quả", `Đây là ${buildingInfo.name}`, [
+    Alert.alert("Kết quả", `Đây là ${buildingInfo.title}`, [
       {
-        text: "Tìm hiểu thông tin về tòa nhà",
+        text: "Tìm hiểu về tòa nhà",
         onPress: () =>
           navigation.navigate("PlaceDetail", { buildingInfo: buildingInfo }),
       },

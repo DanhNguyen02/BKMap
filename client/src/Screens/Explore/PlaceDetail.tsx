@@ -1,9 +1,17 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { View, Text, ScrollView, Image, HStack, Box, Button } from "native-base";
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  HStack,
+  Box,
+  Button,
+} from "native-base";
 import React from "react";
 import { StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import { TBuildingData } from "@/Localization/Type";
-import { Ionicons, Feather } from '@expo/vector-icons';
+import { Ionicons, Feather } from "@expo/vector-icons";
 
 const PlaceDetail: React.FC<{ buildingInfo?: TBuildingData; route: any }> = ({
   route,
@@ -11,11 +19,14 @@ const PlaceDetail: React.FC<{ buildingInfo?: TBuildingData; route: any }> = ({
 }) => {
   const navigation: NavigationProp<any> = useNavigation();
   const data: TBuildingData = route.params.buildingInfo;
-  const returnOldScreen = () => { 
-    if (route.params.hasOwnProperty('oldInfo')) navigation.navigate("PlaceDetail", { buildingInfo: route.params.oldInfo })
-    else navigation.navigate("ExploreAll")
-  }
-  
+  const returnOldScreen = () => {
+    if (route.params.hasOwnProperty("oldInfo"))
+      navigation.navigate("PlaceDetail", {
+        buildingInfo: route.params.oldInfo,
+      });
+    else navigation.navigate("ExploreAll");
+  };
+
   function PairRooms(indexPair: number) {
     return (
       <HStack key={indexPair} space={2} p="2" justifyContent={"center"}>
@@ -26,13 +37,20 @@ const PlaceDetail: React.FC<{ buildingInfo?: TBuildingData; route: any }> = ({
           p="2"
           borderRadius="6"
         >
-          <TouchableOpacity onPress={() => navigation.navigate("PlaceDetail", { buildingInfo: data.rooms[indexPair*2], oldInfo: data })}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("PlaceDetail", {
+                buildingInfo: data.rooms[indexPair * 2],
+                oldInfo: data,
+              })
+            }
+          >
             <Image
               alt="2"
-              source={{ uri: data.rooms[indexPair*2].image }}
+              source={{ uri: data.rooms[indexPair * 2].image }}
               style={styles.roomImage}
             ></Image>
-            <Text style={styles.text}>{data.rooms[indexPair*2].title}</Text>
+            <Text style={styles.text}>{data.rooms[indexPair * 2].title}</Text>
           </TouchableOpacity>
         </Box>
         <Box
@@ -42,17 +60,24 @@ const PlaceDetail: React.FC<{ buildingInfo?: TBuildingData; route: any }> = ({
           p="2"
           borderRadius="6"
         >
-          <TouchableOpacity onPress={() => navigation.navigate("PlaceDetail", { buildingInfo: data.rooms[indexPair*2], oldInfo: data })}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("PlaceDetail", {
+                buildingInfo: data.rooms[indexPair * 2],
+                oldInfo: data,
+              })
+            }
+          >
             <Image
               alt="2"
-              source={{ uri: data.rooms[indexPair*2].image }}
+              source={{ uri: data.rooms[indexPair * 2].image }}
               style={styles.roomImage}
             ></Image>
-            <Text style={styles.text}>{data.rooms[indexPair*2].title}</Text>
+            <Text style={styles.text}>{data.rooms[indexPair * 2].title}</Text>
           </TouchableOpacity>
         </Box>
       </HStack>
-    )
+    );
   }
 
   function SingleRoom(indexPair: number) {
@@ -65,42 +90,48 @@ const PlaceDetail: React.FC<{ buildingInfo?: TBuildingData; route: any }> = ({
           p="2"
           borderRadius="6"
         >
-          <TouchableOpacity onPress={() => navigation.navigate("PlaceDetail", { buildingInfo: data.rooms[indexPair*2], oldInfo: data })}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("PlaceDetail", {
+                buildingInfo: data.rooms[indexPair * 2],
+                oldInfo: data,
+              })
+            }
+          >
             <Image
               alt="2"
-              source={{ uri: data.rooms[indexPair*2].image }}
+              source={{ uri: data.rooms[indexPair * 2].image }}
               style={styles.roomImage}
             ></Image>
-            <Text style={styles.text}>{data.rooms[indexPair*2].title}</Text>
+            <Text style={styles.text}>{data.rooms[indexPair * 2].title}</Text>
           </TouchableOpacity>
         </Box>
       </HStack>
-    )
+    );
   }
 
   function ListRooms() {
-    const pairs = []
-    for (let i = 0; i < Math.floor(data.rooms.length/2); i++) {
-      pairs.push(PairRooms(i))
+    const pairs = [];
+    for (let i = 0; i < Math.floor(data.rooms.length / 2); i++) {
+      pairs.push(PairRooms(i));
     }
-    if (data.rooms.length % 2 != 0) pairs.push(SingleRoom(data.rooms.length-1))
+    if (data.rooms.length % 2 != 0)
+      pairs.push(SingleRoom(data.rooms.length - 1));
     return (
       <Box>
-        <Text fontSize="20" p="5" fontWeight='bold'>
+        <Text fontSize="20" p="5" fontWeight="bold">
           Danh sách phòng đặc biệt
         </Text>
-        <Box>
-          {pairs}
-        </Box>
+        <Box>{pairs}</Box>
       </Box>
-    )
+    );
   }
 
   function ListComments() {
-    let comments = data.comments
+    let comments = data.comments;
     return (
       <Box style={styles.listComments}>
-        {(comments).map((comment) => (
+        {comments?.map((comment) => (
           <HStack space={2} style={styles.userComment}>
             <Image
               alt="1"
@@ -113,7 +144,7 @@ const PlaceDetail: React.FC<{ buildingInfo?: TBuildingData; route: any }> = ({
           </HStack>
         ))}
       </Box>
-    )
+    );
   }
 
   return (
@@ -128,27 +159,23 @@ const PlaceDetail: React.FC<{ buildingInfo?: TBuildingData; route: any }> = ({
       >
         {data.title}
       </Text>
-      <TouchableOpacity 
+      <TouchableOpacity
         style={{
-          position: 'absolute',
+          position: "absolute",
           left: 15,
-          top: 15
+          top: 15,
         }}
         onPress={returnOldScreen}
       >
-        <Ionicons name="chevron-back" size={40} color="black"/>
+        <Ionicons name="chevron-back" size={40} color="black" />
       </TouchableOpacity>
       <ScrollView>
-        <Image
-          alt="1"
-          source={{ uri: data.image}}
-          h="72"
-        ></Image>
+        <Image alt="1" source={{ uri: data.image }} h="72"></Image>
         <Text fontSize={"lg"} p="4" textAlign="center">
           {data.description}
         </Text>
-        {data.hasOwnProperty('rooms') ? <ListRooms /> : <></>}
-        <HStack space={3} style={styles.userComment}>
+        {data.hasOwnProperty("rooms") ? <ListRooms /> : <></>}
+        <HStack space={2} style={styles.userComment}>
           <Image
             alt="1"
             source={require("../../../assets/images/Explore/messi-world-cup.jpg")}
