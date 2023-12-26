@@ -16,6 +16,7 @@ const Profile = () => {
 
   const navigation = useNavigation<any>();
   const navigateChanePassword = () => navigation.navigate("ChangePassword");
+  const navigateUpdateProfile = () => navigation.navigate("UpdateProfile");
 
   return (
     <View 
@@ -41,7 +42,7 @@ const Profile = () => {
         ></Image>
         <Text
           style={{
-            marginTop: 20,
+            paddingTop: 20,
             fontWeight: 'bold',
             fontSize: 24,
           }}
@@ -53,7 +54,9 @@ const Profile = () => {
         <Box style={styles.box}>
           <HStack space={2} style={styles.row}>
             <AntDesign name="profile" size={24} color="black" />
-            <Text style={styles.text}>Edit profile information</Text>
+            <TouchableOpacity onPress={navigateUpdateProfile}>
+              <Text style={styles.text}>Edit profile information</Text>
+            </TouchableOpacity>
           </HStack>
           <HStack space={2} style={styles.row}>
             <Ionicons name="notifications-outline" size={24} color="black" />

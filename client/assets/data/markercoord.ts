@@ -1,6 +1,6 @@
 import { TBuildingData } from "@/Localization/Type/index";
 
-export const api: TBuildingData[] = [
+export const buildings: TBuildingData[] = [
     {
         id: 1, /*A5*/
         title: "Hội trường A5",

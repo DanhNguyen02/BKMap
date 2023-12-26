@@ -97,8 +97,8 @@ export const ChangePassword = () => {
           /> 
         </Box>
       </Box>
-      <Button style={{ marginTop: 10   }}>
-        <Text fontSize={18} color='#FFF'>Change Passowrd</Text>
+      <Button style={{ marginTop: 10, backgroundColor: '#22668D', width: '90%' }}>
+        <Text fontSize={18} color='#FFF'>Change Password</Text>
       </Button>
     </View>
   )
@@ -107,7 +107,8 @@ export const ChangePassword = () => {
 const styles = StyleSheet.create({
   boxInput: {
     width: '90%',
-    marginBottom: 15
+    marginBottom: 15,
+    marginRight: 10
   },
   inputHeader: {
     padding: 5
