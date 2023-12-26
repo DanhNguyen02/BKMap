@@ -1,5 +1,4 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
   View,
   Text,
@@ -11,11 +10,67 @@ import {
 } from "native-base";
 import React from "react";
 import { StyleSheet, TextInput, TouchableOpacity } from "react-native";
-import PlaceDetail from "./PlaceDetail";
+import { buildings } from "../../../assets/data/markercoord";
 
 const Explore: React.FC<{}> = () => {
   const navigation: NavigationProp<any> = useNavigation();
-  const handlePress = () => navigation.navigate("PlaceDetail");
+
+  function PairBuildings(indexPair: number) {
+    return (
+      <HStack space={2}>
+        <Box style={styles.area}>
+          <TouchableOpacity onPress={() => navigation.navigate("PlaceDetail", { buildingInfo: buildings[indexPair*2] })}>
+            <Image
+              alt="1"
+              source={{ uri: buildings[indexPair*2].image }}
+              style={styles.image}
+            ></Image>
+            <Text style={styles.text}>{buildings[indexPair*2].title}</Text>
+          </TouchableOpacity>
+        </Box>
+        <Box style={styles.area}>
+          <TouchableOpacity onPress={() => navigation.navigate("PlaceDetail", { buildingInfo: buildings[indexPair*2+1] })}>
+            <Image
+              alt="2"
+              source={{ uri: buildings[indexPair*2+1].image }}
+              style={styles.image}
+            ></Image>
+            <Text style={styles.text}>{buildings[indexPair*2+1].title}</Text>
+          </TouchableOpacity>
+        </Box>
+      </HStack>
+    )
+  }
+
+  function SingleBuilding (indexPair: number) {
+    return (
+      <HStack key={indexPair} space={2}>
+        <Box style={styles.area}>
+          <TouchableOpacity onPress={() => navigation.navigate("PlaceDetail", { buildingInfo: buildings[indexPair*2] })}>
+            <Image
+              alt="1"
+              source={{ uri: buildings[indexPair*2].image }}
+              style={styles.image}
+            ></Image>
+            <Text style={styles.text}>{buildings[indexPair*2].title}</Text>
+          </TouchableOpacity>
+        </Box>
+      </HStack>
+    )
+  }
+
+  function ListBuildings() {
+    const pairs = []
+    for (let i = 0; i < Math.floor(buildings.length/2); i++) {
+      pairs.push(PairBuildings(i))
+    }
+    if (buildings.length % 2 != 0) pairs.push(SingleBuilding(buildings.length-1))
+    return (
+      <VStack style={styles.areaBox}>
+        {pairs}
+      </VStack>
+    )
+  }
 
   return (
     <View style={styles.container}>
@@ -24,96 +79,7 @@ const Explore: React.FC<{}> = () => {
         <TextInput style={styles.input} placeholder="Search.." />
       </View>
       <ScrollView>
-        <VStack style={styles.areaBox}>
-          <HStack space={2}>
-            <Box style={styles.area}>
-              <TouchableOpacity onPress={handlePress}>
-                <Image
-                  alt="1"
-                  source={require("../../../assets/images/Home/home_01.png")}
-                  style={styles.image}
-                ></Image>
-                <Text style={styles.text}>Toà nhà A3</Text>
-              </TouchableOpacity>
-            </Box>
-            <Box style={styles.area}>
-              <TouchableOpacity onPress={handlePress}>
-                <Image
-                  alt="2"
-                  source={require("../../../assets/images/Home/home_01.png")}
-                  style={styles.image}
-                ></Image>
-                <Text style={styles.text}>Toà nhà A3</Text>
-              </TouchableOpacity>
-            </Box>
-          </HStack>
-          <HStack space={2}>
-            <Box style={styles.area}>
-              <TouchableOpacity onPress={handlePress}>
-                <Image
-                  alt="1"
-                  source={require("../../../assets/images/Home/home_01.png")}
-                  style={styles.image}
-                ></Image>
-                <Text style={styles.text}>Toà nhà A3</Text>
-              </TouchableOpacity>
-            </Box>
-            <Box style={styles.area}>
-              <TouchableOpacity onPress={handlePress}>
-                <Image
-                  alt="2"
-                  source={require("../../../assets/images/Home/home_01.png")}
-                  style={styles.image}
-                ></Image>
-                <Text style={styles.text}>Toà nhà A3</Text>
-              </TouchableOpacity>
-            </Box>
-          </HStack>
-          <HStack space={2}>
-            <Box style={styles.area}>
-              <TouchableOpacity onPress={handlePress}>
-                <Image
-                  alt="1"
-                  source={require("../../../assets/images/Home/home_01.png")}
-                  style={styles.image}
-                ></Image>
-                <Text style={styles.text}>Toà nhà A3</Text>
-              </TouchableOpacity>
-            </Box>
-            <Box style={styles.area}>
-              <TouchableOpacity onPress={handlePress}>
-                <Image
-                  alt="2"
-                  source={require("../../../assets/images/Home/home_01.png")}
-                  style={styles.image}
-                ></Image>
-                <Text style={styles.text}>Toà nhà A3</Text>
-              </TouchableOpacity>
-            </Box>
-          </HStack>
-          <HStack space={2}>
-            <Box style={styles.area}>
-              <TouchableOpacity onPress={handlePress}>
-                <Image
-                  alt="1"
-                  source={require("../../../assets/images/Home/home_01.png")}
-                  style={styles.image}
-                ></Image>
-                <Text style={styles.text}>Toà nhà A3</Text>
-              </TouchableOpacity>
-            </Box>
-            <Box style={styles.area}>
-              <TouchableOpacity onPress={handlePress}>
-                <Image
-                  alt="2"
-                  source={require("../../../assets/images/Home/home_01.png")}
-                  style={styles.image}
-                ></Image>
-                <Text style={styles.text}>Toà nhà A3</Text>
-              </TouchableOpacity>
-            </Box>
-          </HStack>
-        </VStack>
+        <ListBuildings />
       </ScrollView>
     </View>
   );
@@ -146,6 +112,7 @@ const styles = StyleSheet.create({
   },
   areaBox: {
     padding: 10,
+    marginBottom: 50
   },
   area: {
     width: "49%",

@@ -14,7 +14,7 @@ import {
 import Modal from "react-native-modal";
 import { Camera } from "expo-camera";
 import { RootScreens } from "..";
-import { TData } from "../Explore/PlaceDetail";
+import { TData } from "@/Localization/Type";
 import { Area } from "../../../mock/area";
 const QRScan: React.FC<{}> = ({}) => {
   const navigation: NavigationProp<any> = useNavigation();

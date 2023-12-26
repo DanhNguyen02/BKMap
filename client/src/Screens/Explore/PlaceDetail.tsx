@@ -1,17 +1,121 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { View, Text, ScrollView, Image, HStack, Box } from "native-base";
+import { View, Text, ScrollView, Image, HStack, Box, Button } from "native-base";
 import React from "react";
 import { StyleSheet, TextInput, TouchableOpacity } from "react-native";
-import { TData } from "@/Localization/Type";
+import { TBuildingData } from "@/Localization/Type";
+import { Ionicons, Feather } from '@expo/vector-icons';
 
-const PlaceDetail: React.FC<{ buildingInfo?: TData; route: any }> = ({
+const PlaceDetail: React.FC<{ buildingInfo?: TBuildingData; route: any }> = ({
   route,
   buildingInfo,
 }) => {
   const navigation: NavigationProp<any> = useNavigation();
-  const data: TData = route.params.buildingInfo;
-  const handlePress = () => navigation.navigate("PlaceDetail");
-  // console.log("mydata: ", data);
+  const data: TBuildingData = route.params.buildingInfo;
+  const returnOldScreen = () => { 
+    if (route.params.hasOwnProperty('oldInfo')) navigation.navigate("PlaceDetail", { buildingInfo: route.params.oldInfo })
+    else navigation.navigate("ExploreAll")
+  }
+  
+  function PairRooms(indexPair: number) {
+    return (
+      <HStack key={indexPair} space={2} p="2" justifyContent={"center"}>
+        <Box
+          w="48"
+          borderColor="#22668D"
+          borderWidth={"1"}
+          p="2"
+          borderRadius="6"
+        >
+          <TouchableOpacity onPress={() => navigation.navigate("PlaceDetail", { buildingInfo: data.rooms[indexPair*2], oldInfo: data })}>
+            <Image
+              alt="2"
+              source={{ uri: data.rooms[indexPair*2].image }}
+              style={styles.roomImage}
+            ></Image>
+            <Text style={styles.text}>{data.rooms[indexPair*2].title}</Text>
+          </TouchableOpacity>
+        </Box>
+        <Box
+          w="48"
+          borderColor="#22668D"
+          borderWidth={"1"}
+          p="2"
+          borderRadius="6"
+        >
+          <TouchableOpacity onPress={() => navigation.navigate("PlaceDetail", { buildingInfo: data.rooms[indexPair*2], oldInfo: data })}>
+            <Image
+              alt="2"
+              source={{ uri: data.rooms[indexPair*2].image }}
+              style={styles.roomImage}
+            ></Image>
+            <Text style={styles.text}>{data.rooms[indexPair*2].title}</Text>
+          </TouchableOpacity>
+        </Box>
+      </HStack>
+    )
+  }
+
+  function SingleRoom(indexPair: number) {
+    return (
+      <HStack key={indexPair} space={2} p="2" justifyContent={"center"}>
+        <Box
+          w="48"
+          borderColor="#22668D"
+          borderWidth={"1"}
+          p="2"
+          borderRadius="6"
+        >
+          <TouchableOpacity onPress={() => navigation.navigate("PlaceDetail", { buildingInfo: data.rooms[indexPair*2], oldInfo: data })}>
+            <Image
+              alt="2"
+              source={{ uri: data.rooms[indexPair*2].image }}
+              style={styles.roomImage}
+            ></Image>
+            <Text style={styles.text}>{data.rooms[indexPair*2].title}</Text>
+          </TouchableOpacity>
+        </Box>
+      </HStack>
+    )
+  }
+
+  function ListRooms() {
+    const pairs = []
+    for (let i = 0; i < Math.floor(data.rooms.length/2); i++) {
+      pairs.push(PairRooms(i))
+    }
+    if (data.rooms.length % 2 != 0) pairs.push(SingleRoom(data.rooms.length-1))
+    return (
+      <Box>
+        <Text fontSize="20" p="5" fontWeight='bold'>
+          Danh sách phòng đặc biệt
+        </Text>
+        <Box>
+          {pairs}
+        </Box>
+      </Box>
+    )
+  }
+
+  function ListComments() {
+    let comments = data.comments
+    return (
+      <Box style={styles.listComments}>
+        {(comments).map((comment) => (
+          <HStack space={2} style={styles.userComment}>
+            <Image
+              alt="1"
+              source={require("../../../assets/images/Explore/messi-world-cup.jpg")}
+              style={styles.avatar}
+            ></Image>
+            <Box style={styles.boxComment}>
+              <Text style={styles.comment}>{comment.content}</Text>
+            </Box>
+          </HStack>
+        ))}
+      </Box>
+    )
+  }
+
   return (
     <View backgroundColor={"white"} pb="20">
       <Text
@@ -22,57 +126,29 @@ const PlaceDetail: React.FC<{ buildingInfo?: TData; route: any }> = ({
         borderBottomColor={"gray.300"}
         borderBottomWidth="1"
       >
-        Toà nhà A3
+        {data.title}
       </Text>
-      <Text>{data.name}</Text>
+      <TouchableOpacity 
+        style={{
+          position: 'absolute',
+          left: 15,
+          top: 15
+        }}
+        onPress={returnOldScreen}
+      >
+        <Ionicons name="chevron-back" size={40} color="black"/>
+      </TouchableOpacity>
       <ScrollView>
         <Image
           alt="1"
-          source={require("../../../assets/images/Home/home_01.png")}
+          source={{ uri: data.image}}
           h="72"
         ></Image>
         <Text fontSize={"lg"} p="4" textAlign="center">
-          Đây là văn phòng khoa Khoa học và Kỹ thuật Máy tính.
+          {data.description}
         </Text>
-        <Text fontSize="20" p="2">
-          Danh sách phòng đặc biệt
-        </Text>
-        <HStack space={2} p="2" justifyContent={"center"}>
-          <Box
-            w="48"
-            borderColor="#22668D"
-            borderWidth={"1"}
-            p="2"
-            borderRadius="6"
-          >
-            <TouchableOpacity onPress={handlePress}>
-              <Image
-                alt="2"
-                source={require("../../../assets/images/Explore/computerguy.png")}
-                style={styles.roomImage}
-              ></Image>
-              <Text style={styles.text}>Toà nhà A3</Text>
-            </TouchableOpacity>
-          </Box>
-          <Box
-            w="48"
-            borderColor="#22668D"
-            borderWidth={"1"}
-            p="2"
-            borderRadius="6"
-          >
-            <TouchableOpacity onPress={handlePress}>
-              <Image
-                alt="2"
-                source={require("../../../assets/images/Explore/computerguy.png")}
-                style={styles.roomImage}
-              ></Image>
-              <Text style={styles.text}>Toà nhà A3</Text>
-            </TouchableOpacity>
-          </Box>
-        </HStack>
-        <Text style={styles.commentHeader}>Nhận xét</Text>
-        <HStack space={2} style={styles.userComment}>
+        {data.hasOwnProperty('rooms') ? <ListRooms /> : <></>}
+        <HStack space={3} style={styles.userComment}>
           <Image
             alt="1"
             source={require("../../../assets/images/Explore/messi-world-cup.jpg")}
@@ -84,29 +160,12 @@ const PlaceDetail: React.FC<{ buildingInfo?: TData; route: any }> = ({
               placeholder="Viết bình luận của bạn..."
             />
           </View>
+          <Button>
+            <Feather name="send" size={24} color="white" />
+          </Button>
         </HStack>
-        <Box style={styles.listComments}>
-          <HStack space={2} style={styles.userComment}>
-            <Image
-              alt="1"
-              source={require("../../../assets/images/Explore/messi-world-cup.jpg")}
-              style={styles.avatar}
-            ></Image>
-            <Box style={styles.boxComment}>
-              <Text style={styles.comment}>Comment nặng nề quá</Text>
-            </Box>
-          </HStack>
-          <HStack space={2} style={styles.userComment}>
-            <Image
-              alt="1"
-              source={require("../../../assets/images/Explore/messi-world-cup.jpg")}
-              style={styles.avatar}
-            ></Image>
-            <Box style={styles.boxComment}>
-              <Text style={styles.comment}>Comment nặng nề quá</Text>
-            </Box>
-          </HStack>
-        </Box>
+        <Text style={styles.commentHeader}>Nhận xét</Text>
+        <ListComments />
       </ScrollView>
     </View>
   );
@@ -151,9 +210,9 @@ const styles = StyleSheet.create({
   },
   commentInput: {
     padding: 10,
-    marginLeft: 20,
+    marginLeft: 10,
     flexDirection: "row",
-    width: "78%",
+    width: "68%",
     backgroundColor: "#FFF",
     borderWidth: 1,
     borderRadius: 50,
@@ -164,13 +223,12 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   listComments: {
-    paddingTop: 20,
     marginBottom: 50,
   },
   boxComment: {
     backgroundColor: "#FFF",
     width: "78%",
-    marginLeft: 20,
+    marginLeft: 10,
     borderRadius: 50,
     borderColor: "#22668D",
     borderWidth: 1,
