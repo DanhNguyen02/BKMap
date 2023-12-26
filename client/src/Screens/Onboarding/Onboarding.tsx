@@ -61,7 +61,7 @@ export const Onboarding = (props: {
           w="48"
           backgroundColor={"#22668D"}
           borderRadius={24}
-          onPress={() => props.onNavigate(RootScreens.MAIN)}
+          onPress={() => props.onNavigate(RootScreens.LOGIN)}
         >
           <Text fontSize="xl" color={"white"}>
             Bắt đầu

@@ -3,10 +3,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { HomeContainer } from "@/Screens/Home";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Button, View } from "native-base";
-import Map from "@/Screens/Map/Map";
 import { ExploreStack } from "@/Screens/Explore/ExploreStack";
-import Profile from "@/Screens/Profile/Profile";
 import { QRStack } from "@/Screens/QRScan/QRStack";
+import { ProfileStack } from "@/Screens/Profile/ProfileStack";
+import { MapStack } from "@/Screens/Map/Mapstack";
 const Tab = createBottomTabNavigator();
 
 // @refresh reset
@@ -73,8 +73,8 @@ export const MainNavigator = () => {
         component={QRStack}
         // children={() => <QRScan navigation={navigation} />}
       />
-      <Tab.Screen name="Location" component={Map} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Location" component={MapStack} />
+      <Tab.Screen name="Profile" component={ProfileStack} />
     </Tab.Navigator>
   );
 };
