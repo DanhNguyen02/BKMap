@@ -25,6 +25,7 @@ export type RoomData = {
   id: number;
   title: string;
   image: string;
+  description: string;
   comments: Comment;
 }[];
 

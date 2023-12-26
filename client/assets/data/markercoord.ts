@@ -13,6 +13,7 @@ export const buildings: TBuildingData[] = [
                 id: 1,
                 title: "Phòng hội trường",
                 image: "https://img.loigiaihay.com/picture/2020/0520/hoi-nghi-hoa-binh-o-vec-xai-1919-1920.png",
+                description: "Phòng hội trường được dùng cho các sự kiện quan trọng như Hòa ước Versaile, bầu cử tổng thống, ...",
                 comments: [{
                     userid: 101,
                     content: "Ở đây Wifi yếu :((",
@@ -36,6 +37,7 @@ export const buildings: TBuildingData[] = [
                 id: 0,
                 title: "Văn phòng khoa KTXD",
                 image: "https://inhome.vn/hm_content/uploads/thiet-ke/lop-hoc-3_2.jpg",
+                description: "Chủ yếu được sinh viên dùng để xin giấy xác nhận SV",
                 comments: [{
                     userid: 101,
                     content: "KTXDDDD",
@@ -59,6 +61,7 @@ export const buildings: TBuildingData[] = [
                 id: 0,
                 title: "Văn phòng khoa KHKTMT",
                 image: "https://img.loigiaihay.com/picture/2020/0520/hoi-nghi-hoa-binh-o-vec-xai-1919-1920.png",
+                description: "Chủ yếu được sinh viên dùng để xin giấy xác nhận SV",
                 comments: [{
                     userid: 101,
                     content: "Cho e xin đổi chỗ thực tập",
@@ -68,6 +71,7 @@ export const buildings: TBuildingData[] = [
                 id: 1,
                 title: "Phòng Seminar",
                 image: "https://img.loigiaihay.com/picture/2020/0520/hoi-nghi-hoa-binh-o-vec-xai-1919-1920.png",
+                description: "Dùng để họp đồ án là chính",
                 comments: [{
                     userid: 101,
                     content: "Survey cả tháng vẫn chưa xong :((",
@@ -91,6 +95,7 @@ export const buildings: TBuildingData[] = [
                 id: 0,
                 title: "Văn phòng khoa MT",
                 image: "https://img.loigiaihay.com/picture/2020/0520/hoi-nghi-hoa-binh-o-vec-xai-1919-1920.png",
+                description: "Chủ yếu được sinh viên dùng để xin giấy xác nhận SV",
                 comments: [{
                     userid: 101,
                     content: "Bảo vệ môi trường xanh sạch đẹp là...",
@@ -114,6 +119,7 @@ export const buildings: TBuildingData[] = [
                 id: 0,
                 title: "Văn phòng khoa QLCN",
                 image: "https://img.loigiaihay.com/picture/2020/0520/hoi-nghi-hoa-binh-o-vec-xai-1919-1920.png",
+                description: "Chủ yếu được sinh viên dùng để xin giấy xác nhận SV",
                 comments: [{
                     userid: 101,
                     content: "Comments",
@@ -137,6 +143,7 @@ export const buildings: TBuildingData[] = [
                 id: 0,
                 title: "Văn phòng khoa KHUD",
                 image: "https://img.loigiaihay.com/picture/2020/0520/hoi-nghi-hoa-binh-o-vec-xai-1919-1920.png",
+                description: "Chủ yếu được sinh viên dùng để xin giấy xác nhận SV",
                 comments: [{
                     userid: 101,
                     content: "Comments",
@@ -160,6 +167,7 @@ export const buildings: TBuildingData[] = [
                 id: 0,
                 title: "Văn phòng khoa CNVL",
                 image: "https://img.loigiaihay.com/picture/2020/0520/hoi-nghi-hoa-binh-o-vec-xai-1919-1920.png",
+                description: "Chủ yếu được sinh viên dùng để xin giấy xác nhận SV",
                 comments: [{
                     userid: 101,
                     content: "Comments",
@@ -183,6 +191,7 @@ export const buildings: TBuildingData[] = [
                 id: 0,
                 title: "văn phòng khoa KTGT",
                 image: "https://img.loigiaihay.com/picture/2020/0520/hoi-nghi-hoa-binh-o-vec-xai-1919-1920.png",
+                description: "Chủ yếu được sinh viên dùng để xin giấy xác nhận SV",
                 comments: [{
                     userid: 101,
                     content: "Có liên kết Việt - Nhật không ạ @^@!",
@@ -206,6 +215,7 @@ export const buildings: TBuildingData[] = [
                 id: 0,
                 title: "Văn phòng khoa Điện - Điện tử",
                 image: "https://img.loigiaihay.com/picture/2020/0520/hoi-nghi-hoa-binh-o-vec-xai-1919-1920.png",
+                description: "Chủ yếu được sinh viên dùng để xin giấy xác nhận SV",
                 comments: [{
                     userid: 101,
                     content: "R_120/100/80",
@@ -229,6 +239,7 @@ export const buildings: TBuildingData[] = [
                 id: 0,
                 title: "Văn phòng khoa Cơ khí",
                 image: "https://img.loigiaihay.com/picture/2020/0520/hoi-nghi-hoa-binh-o-vec-xai-1919-1920.png",
+                description: "Chủ yếu được sinh viên dùng để xin giấy xác nhận SV",
                 comments: [{
                     userid: 101,
                     content: "Còn cái chân nữa là đủ bộ",
@@ -255,6 +266,7 @@ export const buildings: TBuildingData[] = [
                 id: 0,
                 title: "Văn phòng khoa KTHH",
                 image: "https://img.loigiaihay.com/picture/2020/0520/hoi-nghi-hoa-binh-o-vec-xai-1919-1920.png",
+                description: "Chủ yếu được sinh viên dùng để xin giấy xác nhận SV",
                 comments: [{
                     userid: 101,
                     content: "H2 + O2 -> HOHO",
@@ -291,6 +303,7 @@ export const buildings: TBuildingData[] = [
                 id: 0,
                 title: "PDT",
                 image: "https://img.loigiaihay.com/picture/2020/0520/hoi-nghi-hoa-binh-o-vec-xai-1919-1920.png",
+                description: "Chịu trách nhiệm các việc có liên quan đến học vụ. Có thể đến để xin mở lớp, hủy môn,...",
                 comments: [{
                     userid: 101,
                     content: "Cho e xin rút môn CNMT",
@@ -300,6 +313,7 @@ export const buildings: TBuildingData[] = [
                 id: 1,
                 title: "Phòng tổ chức hành chính",
                 image: "https://img.loigiaihay.com/picture/2020/0520/hoi-nghi-hoa-binh-o-vec-xai-1919-1920.png",
+                description: "Tác giả chưa vào nên chưa biết là gì",
                 comments: [{
                     userid: 101,
                     content: "Comments",
@@ -323,6 +337,7 @@ export const buildings: TBuildingData[] = [
                 id: 0,
                 title: "Thư viện",
                 image: "https://img.loigiaihay.com/picture/2020/0520/hoi-nghi-hoa-binh-o-vec-xai-1919-1920.png",
+                description: "Thư viện, có tài liệu tham khảo và ổ cắm đầy đủ. Một số sinh viên vào để chơi game",
                 comments: [{
                     userid: 101,
                     content: "Năm nay ăn 4",
@@ -346,6 +361,7 @@ export const buildings: TBuildingData[] = [
                 id: 0,
                 title: "Phòng quản trị thiết bị",
                 image: "https://img.loigiaihay.com/picture/2020/0520/hoi-nghi-hoa-binh-o-vec-xai-1919-1920.png",
+                description: "Phòng để quản trị thiết bị (?)",
                 comments: [{
                     userid: 101,
                     content: "Comments",
@@ -355,6 +371,7 @@ export const buildings: TBuildingData[] = [
                 id: 1,
                 title: "khu tự học",
                 image: "https://img.loigiaihay.com/picture/2020/0520/hoi-nghi-hoa-binh-o-vec-xai-1919-1920.png",
+                description: "Khu tự học thật, không dùng để chơi game",
                 comments: [{
                     userid: 101,
                     content: "Ổ điện hay bị lỏng",
@@ -378,6 +395,7 @@ export const buildings: TBuildingData[] = [
                 id: 0,
                 title: "văn phòng BKEnglish",
                 image: "https://img.loigiaihay.com/picture/2020/0520/hoi-nghi-hoa-binh-o-vec-xai-1919-1920.png",
+                description: "Có thể đăng ký thi Toeic ở đây",
                 comments: [{
                     userid: 101,
                     content: "Cho e xin dời ngày thi Toeic",
