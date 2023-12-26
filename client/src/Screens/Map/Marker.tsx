@@ -22,12 +22,13 @@ const BuildingMarker: React.FC<{ position: TBuildingData }> = ({
         }}
         pinColor="red"
         onPress={() => showModal()}
-      />
-      <Modal isOpen={isModalVisible} onClose={() => showModal()}>
-        <View>
-          <Text>{position.id}</Text>
-        </View>
-      </Modal>
+      >
+        <Modal isOpen={isModalVisible} onClose={() => showModal()}>
+          <View>
+            <Text>{position.id}</Text>
+          </View>
+        </Modal>
+      </Marker>
     </View>
   );
 };
