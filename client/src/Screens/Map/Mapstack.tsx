@@ -12,7 +12,7 @@ export const MapStack = () => {
     >
       <Stack.Screen name="Map" component={Map} />
       <Stack.Screen name="PlaceDetail" component={PlaceDetail} />
-      {/* <Stack.Screen name="ExploreAll" component={Explore} /> */}
+      <Stack.Screen name="ExploreAll" component={Explore} />
     </Stack.Navigator>
   );
 };
