@@ -17,59 +17,86 @@ const Explore: React.FC<{}> = () => {
 
   function PairBuildings(indexPair: number) {
     return (
-      <HStack space={2}>
+      <HStack space={2} justifyContent={"center"}>
         <Box style={styles.area}>
-          <TouchableOpacity onPress={() => navigation.navigate("PlaceDetail", { buildingInfo: buildings[indexPair*2] })}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("PlaceDetail", {
+                buildingInfo: buildings[indexPair * 2],
+              })
+            }
+          >
             <Image
               alt="1"
-              source={{ uri: buildings[indexPair*2].image }}
-              style={styles.image}
+              source={{ uri: buildings[indexPair * 2].image }}
+              w="56"
+              h="32"
+              borderTopRadius="10"
             ></Image>
-            <Text style={styles.text}>{buildings[indexPair*2].title}</Text>
+            <Text style={styles.text}>{buildings[indexPair * 2].title}</Text>
           </TouchableOpacity>
         </Box>
         <Box style={styles.area}>
-          <TouchableOpacity onPress={() => navigation.navigate("PlaceDetail", { buildingInfo: buildings[indexPair*2+1] })}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("PlaceDetail", {
+                buildingInfo: buildings[indexPair * 2 + 1],
+              })
+            }
+          >
             <Image
               alt="2"
-              source={{ uri: buildings[indexPair*2+1].image }}
-              style={styles.image}
+              source={{ uri: buildings[indexPair * 2 + 1].image }}
+              w="56"
+              h="32"
+              borderTopRadius="10"
             ></Image>
-            <Text style={styles.text}>{buildings[indexPair*2+1].title}</Text>
+            <Text style={styles.text}>
+              {buildings[indexPair * 2 + 1].title}
+            </Text>
           </TouchableOpacity>
         </Box>
       </HStack>
-    )
+    );
   }
 
-  function SingleBuilding (indexPair: number) {
+  function SingleBuilding(indexPair: number) {
     return (
       <HStack key={indexPair} space={2}>
         <Box style={styles.area}>
-          <TouchableOpacity onPress={() => navigation.navigate("PlaceDetail", { buildingInfo: buildings[indexPair*2] })}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("PlaceDetail", {
+                buildingInfo: buildings[indexPair * 2],
+              })
+            }
+          >
             <Image
               alt="1"
-              source={{ uri: buildings[indexPair*2].image }}
-              style={styles.image}
+              source={{ uri: buildings[indexPair * 2].image }}
+              w="56"
+              h="32"
+              borderTopRadius="10"
             ></Image>
-            <Text style={styles.text}>{buildings[indexPair*2].title}</Text>
+            <Text style={styles.text}>{buildings[indexPair * 2].title}</Text>
           </TouchableOpacity>
         </Box>
       </HStack>
-    )
+    );
   }
 
   function ListBuildings() {
-    const pairs = []
-    for (let i = 0; i < Math.floor(buildings.length/2); i++) {
-      pairs.push(PairBuildings(i))
+    const pairs = [];
+    for (let i = 0; i < Math.floor(buildings.length / 2); i++) {
+      pairs.push(PairBuildings(i));
     }
-    if (buildings.length % 2 != 0) pairs.push(SingleBuilding(buildings.length-1))
+    if (buildings.length % 2 != 0)
+      pairs.push(SingleBuilding(buildings.length - 1));
     return (
-      <VStack style={styles.areaBox}>
+      <VStack space={3} style={styles.areaBox}>
         {pairs}
       </VStack>
-    )
+    );
   }
 
   return (
@@ -112,21 +139,14 @@ const styles = StyleSheet.create({
   },
   areaBox: {
     padding: 10,
-    marginBottom: 50
+    marginBottom: 50,
   },
   area: {
     width: "49%",
-    padding: 10,
     marginBottom: 10,
-    borderWidth: 1,
-    borderRadius: 19,
-    borderColor: "#22668D",
-  },
-  image: {
-    resizeMode: "contain",
-    height: 120,
-    paddingTop: 0,
-    paddingBottom: 0,
+    borderRadius: 10,
+    backgroundColor: "#F5F5F5",
+    // borderColor: "#C2C2C2",
   },
   text: {
     fontWeight: "bold",

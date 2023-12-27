@@ -30,13 +30,7 @@ const PlaceDetail: React.FC<{ buildingInfo?: TBuildingData; route: any }> = ({
   function PairRooms(indexPair: number) {
     return (
       <HStack key={indexPair} space={2} p="2" justifyContent={"center"}>
-        <Box
-          w="48"
-          borderColor="#22668D"
-          borderWidth={"1"}
-          p="2"
-          borderRadius="6"
-        >
+        <Box w="48" backgroundColor="#f5f3f4" borderRadius="10">
           <TouchableOpacity
             onPress={() =>
               navigation.navigate("PlaceDetail", {
@@ -48,18 +42,14 @@ const PlaceDetail: React.FC<{ buildingInfo?: TBuildingData; route: any }> = ({
             <Image
               alt="2"
               source={{ uri: data.rooms[indexPair * 2].image }}
-              style={styles.roomImage}
+              w="56"
+              h="32"
+              borderTopRadius="10"
             ></Image>
             <Text style={styles.text}>{data.rooms[indexPair * 2].title}</Text>
           </TouchableOpacity>
         </Box>
-        <Box
-          w="48"
-          borderColor="#22668D"
-          borderWidth={"1"}
-          p="2"
-          borderRadius="6"
-        >
+        <Box w="48" backgroundColor="#f5f3f4" borderRadius="10">
           <TouchableOpacity
             onPress={() =>
               navigation.navigate("PlaceDetail", {
@@ -71,7 +61,9 @@ const PlaceDetail: React.FC<{ buildingInfo?: TBuildingData; route: any }> = ({
             <Image
               alt="2"
               source={{ uri: data.rooms[indexPair * 2].image }}
-              style={styles.roomImage}
+              w="56"
+              h="32"
+              borderTopRadius="10"
             ></Image>
             <Text style={styles.text}>{data.rooms[indexPair * 2].title}</Text>
           </TouchableOpacity>
@@ -83,13 +75,7 @@ const PlaceDetail: React.FC<{ buildingInfo?: TBuildingData; route: any }> = ({
   function SingleRoom(indexPair: number) {
     return (
       <HStack key={indexPair} space={2} p="2" justifyContent={"center"}>
-        <Box
-          w="48"
-          borderColor="#22668D"
-          borderWidth={"1"}
-          p="2"
-          borderRadius="6"
-        >
+        <Box w="48" backgroundColor="#f5f3f4" borderRadius="10">
           <TouchableOpacity
             onPress={() =>
               navigation.navigate("PlaceDetail", {
@@ -101,7 +87,9 @@ const PlaceDetail: React.FC<{ buildingInfo?: TBuildingData; route: any }> = ({
             <Image
               alt="2"
               source={{ uri: data.rooms[indexPair * 2].image }}
-              style={styles.roomImage}
+              w="56"
+              h="32"
+              borderTopRadius="10"
             ></Image>
             <Text style={styles.text}>{data.rooms[indexPair * 2].title}</Text>
           </TouchableOpacity>
@@ -204,14 +192,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingTop: 20,
     paddingBottom: 20,
-  },
-  area: {
-    // width: "49%",
-    padding: 10,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderRadius: 19,
-    borderColor: "#22668D",
   },
   text: {
     fontWeight: "bold",
