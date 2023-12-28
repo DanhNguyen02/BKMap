@@ -9,7 +9,7 @@ import { Comment } from 'entities/comment.entity';
 export class RoomController {
   constructor(private roomService: RoomService) {}
 
-  @Get()
+  @Get('/:areaId')
   @ApiOperation({
     summary: 'Get all rooms',
     description: 'Get all rooms in database'
@@ -19,11 +19,11 @@ export class RoomController {
     description: 'Get all rooms successfully',
     type: [Room]
   })
-  getAllRooms() {
-    return 'All rooms';
+  getAllRooms(@Param('areaId') areaId: number) {
+    return this.roomService.getAllRooms(areaId);
   }
 
-  @Get('/:id')
+  @Get('/:areaId/:roomId')
   @ApiOperation({
     summary: 'Get room by id',
     description: 'Get room by id'
@@ -33,8 +33,8 @@ export class RoomController {
     description: 'Get room successfully',
     type: Room
   })
-  getRoomById(@Param('id') id: number) {
-    return 'Room id: ' + id;
+  getRoomById(@Param('areaId') areaId: number, @Param('roomId') roomId: number) {
+    return this.roomService.getRoomById(areaId, roomId);
   }
 
   @Post('/comment')

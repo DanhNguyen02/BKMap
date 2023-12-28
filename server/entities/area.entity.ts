@@ -2,8 +2,17 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Room } from "./room.entity";
 import { Comment } from "./comment.entity";
 import { SchemaFactory } from "@nestjs/mongoose";
+import { Document } from "mongoose";
+
+export type AreaDocument = Area & Document
 
 export class Area {
+  @ApiProperty({
+    example: 1,
+    description: "Area id"
+  })
+  id: number
+
   @ApiProperty({
     example: 100.1,
     description: "Area longitude"

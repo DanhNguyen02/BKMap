@@ -20,7 +20,7 @@ export class AreaController {
     type: [Area]
   })
   getAllAreas() {
-    return "Blackpink in your area";
+    return this.areaService.getAllAreas();
   }
 
   @Get('/:id')
@@ -34,7 +34,7 @@ export class AreaController {
     type: Area
   })
   getAreaById(@Param('id') id: number) {
-    return "Area id: " + id;
+    return this.areaService.getAreaById(id);
   }
 
   @Post('/comment')

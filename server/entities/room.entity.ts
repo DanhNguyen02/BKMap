@@ -1,7 +1,17 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Comment } from "./comment.entity";
+import { Document } from "mongoose";
+import { SchemaFactory } from "@nestjs/mongoose";
+
+export type RoomDocument = Room & Document
 
 export class Room {
+  @ApiProperty({
+    example: 1,
+    description: "Room id"
+  })
+  id: number
+
   @ApiProperty({
     example: 'Phòng 103',
     description: "Room name"
@@ -26,3 +36,5 @@ export class Room {
   })
   comments: [Comment];
 }
+
+export const RoomSchema = SchemaFactory.createForClass(Room)
