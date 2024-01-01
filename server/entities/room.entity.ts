@@ -28,7 +28,7 @@ export class Room {
     example: '/images/room/103A3.png',
     description: "Room avatar"
   })
-  avatar: string;
+  image: string;
 
   @ApiProperty({
     example: '[]',

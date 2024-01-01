@@ -2,7 +2,9 @@ import React, { useState, useRef } from 'react';
 import {View, Text, Image, ScrollView, TextInput, Pressable, TouchableOpacity} from 'react-native';
 import {SvgButton, InforField, ConfirmButton, SecureField} from './Self_component'
 
-export const CreateAccountFinish = ({navigation}) => {
+export const CreateAccountFinish = ({navigation, route}) => {
+  const [pet, setPet] = useState("");
+  const [person, setPerson] = useState("");
   const navigateOnCreate = () => {
     navigation.navigate('Login');
   }

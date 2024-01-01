@@ -2,21 +2,30 @@ import React, { useState, useRef } from 'react';
 import {View, Text, Image, ScrollView, TextInput, Pressable, TouchableOpacity} from 'react-native';
 import {SvgButton, InforField, ConfirmButton, SecureField, url_server} from './Self_component'
 
-export const ForgotPassNewPass = ({navigation, username}) => {
+export const ForgotPassNewPass = ({navigation, route}) => {
   const [firstpass, setfirstpass] = useState("");
   const [secondpass, setsecondpass] = useState("");
   const [isSame, setIsSame] = useState(true);
+  const {username} = route.params
   const navigateOnFinish = () => {
     if(firstpass == secondpass){
-      const data : Record<string, any> = {
-        username: username,
-        password: firstpass
-      }
-      const params = new URLSearchParams();
-      for(const key in data){
-        params.append(key, data[key]);
-      }
-      fetch(url_server + '/user/password').then(response => response.json()).then((value) => {
+      // const data : Record<string, any> = {
+      //   username: username,
+      //   password: firstpass
+      // }
+      // const params = new URLSearchParams();
+      // for(const key in data){
+      //   params.append(key, data[key]);
+      // }
+      //alert('gg');
+      fetch(url_server + '/user/password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: username,
+          password: firstpass,
+        })
+      }).then(response => response.json()).then((value) => {
         if(value.success) navigation.navigate('Login');
         else setIsSame(false);
       }).catch(console.error);

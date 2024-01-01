@@ -10,13 +10,11 @@ export class UserController{
   constructor(private userService: UserService) {}
 
   @Get()
-  all_data(){
+  async all_data(){
     console.log("I got it!");
-    this.userService.findAll().then((value) => {
-      console.log("getin");
-      console.log(value);
-      return value;
-    }).catch(console.error);
+    const data = await this.userService.findAll();
+    console.log({data: data})
+    return {data: data};
   }
 
 	@Post('signup')
@@ -74,7 +72,8 @@ export class UserController{
 
   @Post('password')
   async newpass(@Body() dto: AccountDto){
-    let success = await this.userService.getAccountChangePassword(dto.username, dto.password)
+    let success = await this.userService.getAccountChangePassword(dto.username, dto.password);
+    console.log(success)
     return {success: success};
   }
 

@@ -26,7 +26,7 @@ const navigateOnBack = () => {
       </View>
       
       <View style={{padding: 10}}><InforField title={'What is your favourite kind of animal?'} onInput={setPet}/></View>
-      <View style={{padding: 10}}><InforField title={'Who is your favourite person?'} onInput={}/></View>
+      <View style={{padding: 10}}><InforField title={'Who is your favourite person?'} onInput={setName}/></View>
       
       <View>
       <Text style = {{color: 'red', fontSize: 14, opacity: wrongpass ? 1 : 0}}>Incorrect information at one or more fields</Text>
