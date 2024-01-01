@@ -41,7 +41,7 @@ export class Area {
     example: '/images/area/A3.png',
     description: "Area avatar"
   })
-  avatar: string;
+  image: string;
 
   @ApiProperty({
     example: '[]',

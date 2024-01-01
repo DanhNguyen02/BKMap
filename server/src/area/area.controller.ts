@@ -37,7 +37,7 @@ export class AreaController {
     return this.areaService.getAreaById(id);
   }
 
-  @Post('/comment')
+  @Post('/:id/comment')
   @ApiOperation({
     summary: 'Comment about area',
     description: 'Comment about area'
@@ -46,7 +46,7 @@ export class AreaController {
     status: 200,
     description: 'Comment successfully',
   })
-  handleComment(@Body() comment: Comment) {
-    return "Comment nang ne qua. Ban thua do a";
+  handleComment(@Param('id') id: number, @Body() comment: Comment) {
+    return this.areaService.postCommment(id, comment);
   }
 }
