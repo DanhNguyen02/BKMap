@@ -39,16 +39,23 @@ const QRScan: React.FC<{}> = ({}) => {
     return unsubscribe;
   }, [navigation]);
   const connect = (data: string) => {
-    data = data.substring(data.indexOf(":") + 1);
-    const buildingInfo: TBuildingData = buildings[Number(data) - 1];
-    // console.log(buildingInfo);
-    Alert.alert("Kết quả", `Đây là ${buildingInfo.title}`, [
+    if (data.includes("bkmap")) 
+    {
+      data = data.substring(data.indexOf(":") + 1);
+      const buildingInfo: TBuildingData = buildings[Number(data) - 1];
+      Alert.alert("Kết quả", `Đây là ${buildingInfo.title}`, [
       {
         text: "Tìm hiểu về tòa nhà",
         onPress: () =>
           navigation.navigate("PlaceDetail", { buildingInfo: buildingInfo }),
       },
-    ]);
+      ]);
+    }
+    else {
+      toggleModal();
+    }
+    // console.log(buildingInfo);
+    
   };
   const handleBarCodeScanned = ({ data }: { data: string }) => {
     setScanned(true);
@@ -72,7 +79,6 @@ const QRScan: React.FC<{}> = ({}) => {
         style={styles.button}
         onPress={() => {
           setScanned(false);
-          toggleModal();
         }}
       >
         <HStack space="2">
