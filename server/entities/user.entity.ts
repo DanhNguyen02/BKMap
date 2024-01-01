@@ -49,6 +49,20 @@ export class User {
   phone: string;
 
   @ApiProperty({
+    example: 'cat',
+    description: "Security question: favourite animal"
+  })
+  @Prop()
+  pet: string;
+
+  @ApiProperty({
+    example: 'zaniolo',
+    description: "Security question: favourite person"
+  })
+  @Prop()
+  person: string;
+
+  @ApiProperty({
     example: '/images/messi_trophy.png',
     description: "User's avatar link"
   })
