@@ -1,17 +1,31 @@
-import { View, Text, Modal } from "native-base";
-import MapView, { Marker } from "react-native-maps";
+import { View, Text } from "native-base";
+import MapView from "react-native-maps";
 import React, { useEffect, useState } from "react";
 import { TBuildingData } from "@/Localization/Type";
-import { buildings } from "../../../assets/data/markercoord";
 import BuildingMarker from "./Marker";
+import { ActivityIndicator } from "react-native";
 const initialRegion = {
   latitude: 10.77278,
   longitude: 106.65972,
   latitudeDelta: 0.0015,
   longitudeDelta: 0.0025,
 };
+const baseURL = "https://bkmap-service.onrender.com/area";
 const Map: React.FC<{}> = ({}) => {
+  const [data, setData] = useState<TBuildingData[]>([]);
   const [ref, setRef] = useState<MapView | null>();
+  useEffect(() => {
+    const fetchMap = async () => {
+      try {
+        const response = await fetch(baseURL);
+        const fetchData: TBuildingData[] = await response.json();
+        setData(fetchData);
+      } catch (e) {
+        console.log("Error: ", e);
+      }
+    };
+    fetchMap();
+  }, []);
   useEffect(() => {
     ref &&
       ref.setMapBoundaries(
@@ -25,24 +39,27 @@ const Map: React.FC<{}> = ({}) => {
         }
       );
   }, [ref]);
-  const api = {
-    latitude: 10.773238746328245,
-    longitude: 106.65960321447547,
-    id: 1,
-  };
-  const data = buildings;
   return (
     <View>
-      <MapView
-        initialRegion={initialRegion}
-        style={{ width: "100%", height: "100%" }}
-        showsBuildings={false}
-        ref={(ref) => setRef(ref)}
-      >
-        {data.map((point: TBuildingData) => {
-          return <BuildingMarker position={point} key={point.id} />;
-        })}
-      </MapView>
+      {data.length === 0 ? (
+        <View pt="72" alignItems={"center"} justifyContent={"center"}>
+          <View>
+            <ActivityIndicator size={"large"} color="#22668D" />
+            <Text fontSize={"lg"}>Loading</Text>
+          </View>
+        </View>
+      ) : (
+        <MapView
+          initialRegion={initialRegion}
+          style={{ width: "100%", height: "100%" }}
+          showsBuildings={false}
+          ref={(ref) => setRef(ref)}
+        >
+          {data.map((point: TBuildingData) => {
+            return <BuildingMarker position={point} key={point.id} />;
+          })}
+        </MapView>
+      )}
     </View>
   );
 };
