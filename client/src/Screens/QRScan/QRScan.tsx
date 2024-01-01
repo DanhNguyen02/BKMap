@@ -42,14 +42,22 @@ const QRScan: React.FC<{}> = ({}) => {
     if (data.includes("bkmap")) 
     {
       data = data.substring(data.indexOf(":") + 1);
-      const buildingInfo: TBuildingData = buildings[Number(data) - 1];
-      Alert.alert("Kết quả", `Đây là ${buildingInfo.title}`, [
-      {
-        text: "Tìm hiểu về tòa nhà",
-        onPress: () =>
-          navigation.navigate("PlaceDetail", { buildingInfo: buildingInfo }),
-      },
-      ]);
+      if (1 <= Number(data) && Number(data) <= 22) {
+        const buildingInfo: TBuildingData = buildings[Number(data) - 1];
+        Alert.alert("Kết quả", `Đây là ${buildingInfo.title}`, [
+        {
+          text: "Tìm hiểu về tòa nhà",
+          onPress: () =>
+            navigation.navigate("PlaceDetail", { buildingInfo: buildingInfo }),
+        },
+        {
+          text: "Cancel",
+        }
+        ]);
+      }
+      else {
+        toggleModal();
+      }
     }
     else {
       toggleModal();
