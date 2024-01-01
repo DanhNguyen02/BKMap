@@ -6,23 +6,12 @@ import { MainNavigator } from "./Main";
 import { OnboardingContainer } from "@/Screens/Onboarding";
 import { RootScreens } from "@/Screens";
 import { Login } from "@/Screens/Login/Login";
-import { ForgotPassAsking } from "@/Screens/Login/ForgotPassAsking";
-import { ForgotPassVerify } from "@/Screens/Login/ForgotPassVerify";
-import { ForgotPassNewPass } from "@/Screens/Login/ForgotPassNewPass";
-import { CreateAccountInformation } from "@/Screens/Login/CreateAccountInformation";
-import { CreateAccountVerify } from "@/Screens/Login/CreateAccountVerify";
-import { CreateAccountFinish } from "@/Screens/Login/CreateAccountFinish";
+import { LoginNavigator } from "@/Screens/Login/LoginNavigator";
 
 export type RootStackParamList = {
   [RootScreens.MAIN]: undefined;
   [RootScreens.ONBOARDING]: undefined;
   [RootScreens.LOGIN]: undefined;
-  [RootScreens.FORGOTPASSASKING]: undefined;
-  [RootScreens.FORGOTPASSVERIFY]: undefined;
-  [RootScreens.FORGOTPASSNEWPASS]: undefined;
-  [RootScreens.CREATEACCOUNTINFORMATION]: undefined;
-  [RootScreens.CREATEACCOUNTVERIFY]: undefined;
-  [RootScreens.CREATEACCOUNTFINISH]: undefined;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -39,31 +28,7 @@ const ApplicationNavigator = () => {
         />
         <RootStack.Screen
           name={RootScreens.LOGIN}
-          component={Login}
-        />
-        <RootStack.Screen
-          name={RootScreens.FORGOTPASSASKING}
-          component={ForgotPassAsking}
-        />
-        <RootStack.Screen
-          name={RootScreens.FORGOTPASSVERIFY}
-          component={ForgotPassVerify}
-        />
-        <RootStack.Screen
-          name={RootScreens.FORGOTPASSNEWPASS}
-          component={ForgotPassNewPass}
-        />
-        <RootStack.Screen
-          name={RootScreens.CREATEACCOUNTINFORMATION}
-          component={CreateAccountInformation}
-        />
-        <RootStack.Screen
-          name={RootScreens.CREATEACCOUNTVERIFY}
-          component={CreateAccountVerify}
-        />
-        <RootStack.Screen
-          name={RootScreens.CREATEACCOUNTFINISH}
-          component={CreateAccountFinish}
+          component={LoginNavigator}
         />
         <RootStack.Screen
           name={RootScreens.MAIN}
