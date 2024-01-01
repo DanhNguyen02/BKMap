@@ -13,7 +13,7 @@ import { RoomModule } from './room/room.module';
     //   envFilePath: '.env',
     //   isGlobal: true
     // }),
-    MongooseModule.forRoot('mongodb+srv://danhnguyenhuu:bkmap@bkmap.k2itw9f.mongodb.net/?retryWrites=true&w=majority'),
+    MongooseModule.forRoot('mongodb+srv://danhnguyenhuu:bkmap@bkmap.k2itw9f.mongodb.net/BKMap'),
     // MongooseModule.forRootAsync({
     //   imports: [ConfigModule],
     //   inject: [ConfigService],
