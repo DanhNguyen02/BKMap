@@ -46,7 +46,11 @@ export const MainNavigator = () => {
       })}
     >
       <Tab.Screen name="Home" component={HomeContainer} />
-      <Tab.Screen name="Explore" component={ExploreStack} />
+      <Tab.Screen
+        name="Explore"
+        component={ExploreStack}
+        options={{ tabBarLabel: "ExploreStack" }}
+      />
       <Tab.Screen
         name="Add"
         options={{

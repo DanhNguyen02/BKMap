@@ -18,7 +18,7 @@ const Explore: React.FC<{}> = () => {
   function PairBuildings(indexPair: number) {
     return (
       <HStack space={2} justifyContent={"center"}>
-        <Box style={styles.area}>
+        <Box style={styles.area} key={buildings[indexPair * 2].id}>
           <TouchableOpacity
             onPress={() =>
               navigation.navigate("PlaceDetail", {
@@ -36,7 +36,7 @@ const Explore: React.FC<{}> = () => {
             <Text style={styles.text}>{buildings[indexPair * 2].title}</Text>
           </TouchableOpacity>
         </Box>
-        <Box style={styles.area}>
+        <Box style={styles.area} key={buildings[indexPair * 2 + 1].id}>
           <TouchableOpacity
             onPress={() =>
               navigation.navigate("PlaceDetail", {
@@ -63,7 +63,7 @@ const Explore: React.FC<{}> = () => {
   function SingleBuilding(indexPair: number) {
     return (
       <HStack key={indexPair} space={2}>
-        <Box style={styles.area}>
+        <Box style={styles.area} key={buildings[indexPair * 2].id}>
           <TouchableOpacity
             onPress={() =>
               navigation.navigate("PlaceDetail", {

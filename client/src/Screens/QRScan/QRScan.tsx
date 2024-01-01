@@ -46,7 +46,12 @@ const QRScan: React.FC<{}> = ({}) => {
       {
         text: "Tìm hiểu về tòa nhà",
         onPress: () =>
-          navigation.navigate("PlaceDetail", { buildingInfo: buildingInfo }),
+          navigation.navigate("Explore", {
+            screen: "PlaceDetail",
+            params: {
+              buildingInfo: buildingInfo,
+            },
+          }),
       },
     ]);
   };

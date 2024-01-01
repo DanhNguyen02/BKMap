@@ -49,17 +49,19 @@ const BuildingMarker: React.FC<{ position: TBuildingData }> = ({
                 backgroundColor={"#22668D"}
                 mt="2"
                 onPress={() =>
-                  navigation.navigate("PlaceDetail", {
-                    buildingInfo: position,
+                  navigation.navigate("Explore", {
+                    screen: "PlaceDetail",
+                    params: {
+                      buildingInfo: position,
+                    },
                   })
                 }
               >
                 <Text fontSize={"lg"} color="white">
-                  More information
+                  Chi tiết
                 </Text>
               </Button>
             </View>
-            {/* </Modal.Body> */}
           </Modal.Content>
         </Modal>
       </Marker>
