@@ -37,7 +37,7 @@ export class RoomController {
     return this.roomService.getRoomById(areaId, roomId);
   }
 
-  @Post('/comment')
+  @Post('/:areaId/:roomId/comment')
   @ApiOperation({
     summary: 'Comment about room',
     description: 'Comment about room'
@@ -46,7 +46,7 @@ export class RoomController {
     status: 200,
     description: 'Comment successfully',
   })
-  handleComment(@Body() comment: Comment) {
+  handleComment(@Param('areaId') areaId: number, @Param('roomId') roomId: number, @Body() comment: Comment) {
     return "Comment nang ne qua. Ban thua do a";
   }
 }

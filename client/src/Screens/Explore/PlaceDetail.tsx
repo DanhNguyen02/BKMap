@@ -40,6 +40,7 @@ const PlaceDetail: React.FC<{ route: any }> = ({ route }) => {
                 oldInfo: data,
               })
             }
+            key={data.rooms[indexPair * 2].id}
           >
             <Image
               alt="2"
@@ -64,6 +65,7 @@ const PlaceDetail: React.FC<{ route: any }> = ({ route }) => {
                 oldInfo: data,
               })
             }
+            key={data.rooms[indexPair * 2 + 1].id}
           >
             <Image
               alt="2"
@@ -97,6 +99,7 @@ const PlaceDetail: React.FC<{ route: any }> = ({ route }) => {
                 oldInfo: data,
               })
             }
+            key={data.rooms[indexPair * 2].id}
           >
             <Image
               alt="2"

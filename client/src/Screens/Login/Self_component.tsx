@@ -3,6 +3,8 @@ import {View, Text, Image, ScrollView, TextInput, Pressable, TouchableOpacity} f
 import Svg, {Path} from 'react-native-svg';
 import OTPInputField from './OTPInputField';
 
+export const url_server = 'https://bkmap-service.onrender.com';
+
 export const SvgButton = ({onPress}) =>{
   return (
     <TouchableOpacity onPress={onPress}>
@@ -42,7 +44,7 @@ export const OTPComponent = () => {
   );
 }
 
-export const InforField = ({title}) => {
+export const InforField = ({title, onInput}) => {
     return(
         <View style={{
             height: 60,
@@ -54,13 +56,13 @@ export const InforField = ({title}) => {
           }}>
             <Text style={{fontSize: 14, fontWeight: 'bold', color: 'gray'}}>{title}</Text>
             <TextInput style={{fontSize: 14,}}
-              placeholder='Type your information here'
+              placeholder='Type your information here' onChangeText={onInput}
             />
         </View>
     );
 }
 
-export const LoginField = ({placeholder, secureTextEntry}) => {
+export const LoginField = ({placeholder, secureTextEntry, onInput}) => {
   return(
       <View style={{
           height: 50,
@@ -73,12 +75,13 @@ export const LoginField = ({placeholder, secureTextEntry}) => {
           <TextInput style={{fontSize: 16,}}
             placeholder={placeholder}
             secureTextEntry={secureTextEntry}
+            onChangeText={(value) => onInput(value)}
           />
       </View>
   );
 }
 
-export const SecureField = ({title}) =>{
+export const SecureField = ({title, onInput}) =>{
     return (
         <View style={{
             height: 60,
@@ -90,7 +93,7 @@ export const SecureField = ({title}) =>{
           }}>
             <Text style={{fontSize: 14, fontWeight: 'bold', color: 'gray'}}>{title}</Text>
             <TextInput style={{fontSize: 14,}}
-              placeholder='Type your password here' secureTextEntry={true}
+              placeholder='Type your password here' secureTextEntry={true} onChangeText={(value) => onInput(value)}
             />
         </View>
     );

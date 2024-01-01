@@ -9,7 +9,15 @@ import { User } from "entities/user.entity";
 export class UserController{
   constructor(private userService: UserService) {}
 
-	@Post('/signup')
+  @Get()
+  async all_data(){
+    console.log("I got it!");
+    const data = await this.userService.findAll();
+    console.log({data: data})
+    return {data: data};
+  }
+
+	@Post('signup')
   @ApiOperation({
     summary: 'User signup',
     description: 'User create new account'
@@ -18,8 +26,13 @@ export class UserController{
     status: 200,
     description: 'Create account successfully',
   })
-	signUp(@Body() dto: AccountDto) {
-		return this.userService.func(dto);
+	async signUp(@Body() dto: User) {
+    let num = await this.userService.getAccount(dto.username);
+    if(num == 0){
+      await this.userService.func(dto);
+      return {success: true};
+    }
+    else return {success: false};
 	}
 
 	@Post('login')
@@ -31,9 +44,38 @@ export class UserController{
     status: 200,
     description: 'Log in successfully'
   })
-	logIn(@Body() dto: AccountDto) {
-		return this.userService.getLogIn();
+	async logIn(@Body() dto: AccountDto) {
+    // console.log("Ole!", dto.username + "ulatroi");
+    // let data = {num: 0};
+		// this.userService.getLogIn(dto.username, dto.password).then((value) => {
+    //   console.log(value);
+    //   data.num = value;
+    //   console.log(data);
+    // }).then(() => {return data;}).catch(console.error);
+    //return data;
+    let count = await this.userService.getLogIn(dto.username, dto.password);
+    return {success: count != 0}
 	}
+
+  @Post('account')
+  async getAccount(@Body() dto: AccountDto){
+    const data = {num: 0};
+    data.num = await this.userService.getAccount(dto.username);
+    return data;
+  }
+
+  @Post('exist')
+  async isAccountValid(@Body() dto: User){
+    const num = await this.userService.getAccountExist(dto.username, dto.pet, dto.person);
+    return {success: num != 0}
+  }
+
+  @Post('password')
+  async newpass(@Body() dto: AccountDto){
+    let success = await this.userService.getAccountChangePassword(dto.username, dto.password);
+    console.log(success)
+    return {success: success};
+  }
 
   @Get('logout/:id')
   @ApiOperation({

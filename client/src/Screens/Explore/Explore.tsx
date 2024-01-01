@@ -1,3 +1,4 @@
+import { TBuildingData } from "@/Localization/Type";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import {
   View,
@@ -8,11 +9,35 @@ import {
   Image,
   ScrollView,
 } from "native-base";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator } from "react-native";
 import { StyleSheet, TextInput, TouchableOpacity } from "react-native";
-import { buildings } from "../../../assets/data/markercoord";
+// import { buildings } from "../../../assets/data/markercoord";
 
 const Explore: React.FC<{}> = () => {
+  const [buildings, setBuildings] = useState<TBuildingData[]>([]);
+
+  useEffect(() => {
+    getBuildings();
+  }, []);
+
+  async function getBuildings() {
+    const response = await fetch("https://bkmap-service.onrender.com/area", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      alert("Error occured");
+      return;
+    }
+
+    const listBuildings = await response.json();
+    setBuildings(listBuildings);
+  }
+
   const navigation: NavigationProp<any> = useNavigation();
 
   function PairBuildings(indexPair: number) {
@@ -25,6 +50,7 @@ const Explore: React.FC<{}> = () => {
                 buildingInfo: buildings[indexPair * 2],
               })
             }
+            key={buildings[indexPair * 2].id}
           >
             <Image
               alt="1"
@@ -43,6 +69,7 @@ const Explore: React.FC<{}> = () => {
                 buildingInfo: buildings[indexPair * 2 + 1],
               })
             }
+            key={buildings[indexPair * 2 + 1].id}
           >
             <Image
               alt="2"
@@ -70,6 +97,7 @@ const Explore: React.FC<{}> = () => {
                 buildingInfo: buildings[indexPair * 2],
               })
             }
+            key={buildings[indexPair * 2].id}
           >
             <Image
               alt="1"
@@ -105,9 +133,16 @@ const Explore: React.FC<{}> = () => {
       <View style={styles.search}>
         <TextInput style={styles.input} placeholder="Search.." />
       </View>
-      <ScrollView>
-        <ListBuildings />
-      </ScrollView>
+      {buildings.length === 0 ? (
+        <View style={{ paddingTop: 30 }}>
+          <ActivityIndicator size={"large"} color="#22668D" />
+          <Text>Loading</Text>
+        </View>
+      ) : (
+        <ScrollView>
+          <ListBuildings />
+        </ScrollView>
+      )}
     </View>
   );
 };
