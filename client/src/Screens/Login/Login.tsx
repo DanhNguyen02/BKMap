@@ -13,25 +13,25 @@ export const Login = ({navigation}) => {
     const navigateOnSignup= () => {
         navigation.navigate('CreateAccountInformation');
     }
-    const navigateOnLogin = () => {
-      const data : Record<string, any> = {
-        username: username,
-        password: password
-      }
-      const params = new URLSearchParams();
-      for(const key in data){
-        params.append(key, data[key]);
-      }
+    const navigateOnLogin = async () => {
       fetch(url_server + '/user/login', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: username,
+          password: password
+        })
       }).then(response => response.json()).then((value) => {
-        console.log(value);
         if(value.success) navigation.navigate('Main');
         else setwrongpass(true);
       }).catch(console.error);
-      //navigation.navigate('Main');
+
+    //   fetch(url_server + '/user').then(response => response.json()).then((value) => {
+    //     for(let i=0; i<value.data.length; i++){
+    //       if(value.data[i].username == username && value.data[i].password == password) navigation.navigate('Main');
+    //     }
+    //     setwrongpass(true);
+    // }).catch(console.error);
     }
 
   return (

@@ -3,7 +3,7 @@ import {View, Text, Image, ScrollView, TextInput, Pressable, TouchableOpacity} f
 import Svg, {Path} from 'react-native-svg';
 import OTPInputField from './OTPInputField';
 
-export const url_server = 'http://localhost:3000';
+export const url_server = 'https://bkmap-service.onrender.com';
 
 export const SvgButton = ({onPress}) =>{
   return (
@@ -75,7 +75,7 @@ export const LoginField = ({placeholder, secureTextEntry, onInput}) => {
           <TextInput style={{fontSize: 16,}}
             placeholder={placeholder}
             secureTextEntry={secureTextEntry}
-            onChangeText={onInput}
+            onChangeText={(value) => onInput(value)}
           />
       </View>
   );
@@ -93,7 +93,7 @@ export const SecureField = ({title, onInput}) =>{
           }}>
             <Text style={{fontSize: 14, fontWeight: 'bold', color: 'gray'}}>{title}</Text>
             <TextInput style={{fontSize: 14,}}
-              placeholder='Type your password here' secureTextEntry={true} onChangeText={onInput}
+              placeholder='Type your password here' secureTextEntry={true} onChangeText={(value) => onInput(value)}
             />
         </View>
     );

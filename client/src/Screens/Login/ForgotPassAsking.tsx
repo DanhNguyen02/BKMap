@@ -8,19 +8,23 @@ export const ForgotPassAsking = ({navigation}) => {
   const [person, setPerson] = useState("");
   const [wrongpass, setwrongpass] = useState(false);
   const navigateOnNext = () => {
-    const data : Record<string, any> = {
-      username: username,
-      pet: pet,
-      person: person,
-    }
-    const params = new URLSearchParams();
-    for(const key in data){
-      params.append(key, data[key]);
-    }
+    // const data : Record<string, any> = {
+    //   username: username,
+    //   pet: pet,
+    //   person: person,
+    // }
+    // const params = new URLSearchParams();
+    // for(const key in data){
+    //   params.append(key, data[key]);
+    // }
     fetch(url_server + '/user/exist', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: params
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: username,
+        pet: pet,
+        person: person,
+      })
     }).then(response => response.json()).then((value) => {
       if(value.success) navigation.navigate('ForgotPassNewPass', {username: username});
       else setwrongpass(true);
@@ -42,7 +46,7 @@ export const ForgotPassAsking = ({navigation}) => {
       </View>
       
       <View style={{padding: 10}}><InforField title={'Username'} onInput={setusername}/></View>
-      <View style={{padding: 10}}><InforField title={'What is your favourite kind of animal?'} onInput={setPet}/></View>
+      <View style={{padding: 10}}><InforField title={'What is your favourite animal?'} onInput={setPet}/></View>
       <View style={{padding: 10}}><InforField title={'Who is your favourite person?'} onInput={setPerson}/></View>
 
       <View>
