@@ -8,7 +8,7 @@ export const ForgotPassNewPass = ({navigation, route}) => {
   const [isSame, setIsSame] = useState(true);
   const {username} = route.params
   const navigateOnFinish = () => {
-    if(true){
+    if(firstpass == secondpass){
       // const data : Record<string, any> = {
       //   username: username,
       //   password: firstpass
