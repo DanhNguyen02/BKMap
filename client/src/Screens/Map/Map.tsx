@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { TBuildingData } from "@/Localization/Type";
 import BuildingMarker from "./Marker";
 import { ActivityIndicator } from "react-native";
+import { PROVIDER_GOOGLE } from "react-native-maps";
 const initialRegion = {
   latitude: 10.77278,
   longitude: 106.65972,
@@ -54,6 +55,7 @@ const Map: React.FC<{}> = ({}) => {
           style={{ width: "100%", height: "100%" }}
           showsBuildings={false}
           ref={(ref) => setRef(ref)}
+          provider={PROVIDER_GOOGLE}
         >
           {data.map((point: TBuildingData) => {
             return <BuildingMarker position={point} key={point.id} />;

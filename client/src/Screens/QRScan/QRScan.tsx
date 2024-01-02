@@ -1,4 +1,4 @@
-import { View, Text, Box, HStack, Button } from "native-base";
+import { View, Text, Box, HStack } from "native-base";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { BarCodeScanner } from "expo-barcode-scanner";
@@ -7,14 +7,12 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
-  TouchableHighlight,
   TouchableWithoutFeedback,
   Alert,
 } from "react-native";
 import Modal from "react-native-modal";
 import { Camera } from "expo-camera";
-import { RootScreens } from "..";
-import { TBuildingData, TData } from "@/Localization/Type";
+import { TBuildingData } from "@/Localization/Type";
 import { buildings } from "../../../assets/data/markercoord";
 const QRScan: React.FC<{}> = ({}) => {
   const navigation: NavigationProp<any> = useNavigation();
