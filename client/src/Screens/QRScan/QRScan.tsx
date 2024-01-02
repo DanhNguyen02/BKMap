@@ -1,4 +1,4 @@
-import { View, Text, Box, HStack, Button } from "native-base";
+import { View, Text, Box, HStack } from "native-base";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { BarCodeScanner } from "expo-barcode-scanner";
@@ -7,14 +7,12 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
-  TouchableHighlight,
   TouchableWithoutFeedback,
   Alert,
 } from "react-native";
 import Modal from "react-native-modal";
 import { Camera } from "expo-camera";
-import { RootScreens } from "..";
-import { TBuildingData, TData } from "@/Localization/Type";
+import { TBuildingData } from "@/Localization/Type";
 import { buildings } from "../../../assets/data/markercoord";
 const QRScan: React.FC<{}> = ({}) => {
   const navigation: NavigationProp<any> = useNavigation();
@@ -39,32 +37,31 @@ const QRScan: React.FC<{}> = ({}) => {
     return unsubscribe;
   }, [navigation]);
   const connect = (data: string) => {
-    if (data.includes("bkmap")) {
+    if (data.includes("bkmap")) 
+    {
       data = data.substring(data.indexOf(":") + 1);
       if (1 <= Number(data) && Number(data) <= 22) {
         const buildingInfo: TBuildingData = buildings[Number(data) - 1];
         Alert.alert("Kết quả", `Đây là ${buildingInfo.title}`, [
-          {
-            text: "Tìm hiểu về tòa nhà",
-            onPress: () =>
-              navigation.navigate("Explore", {
-                screen: "PlaceDetail",
-                params: {
-                  buildingInfo: buildingInfo,
-                },
-              }),
-          },
-          {
-            text: "Cancel",
-          },
+        {
+          text: "Tìm hiểu về tòa nhà",
+          onPress: () =>
+            navigation.navigate("PlaceDetail", { buildingInfo: buildingInfo }),
+        },
+        {
+          text: "Cancel",
+        }
         ]);
-      } else {
+      }
+      else {
         toggleModal();
       }
-    } else {
+    }
+    else {
       toggleModal();
     }
     // console.log(buildingInfo);
+    
   };
   const handleBarCodeScanned = ({ data }: { data: string }) => {
     setScanned(true);
