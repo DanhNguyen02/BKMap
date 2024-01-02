@@ -4,7 +4,7 @@
     "slug": "expo-redux-template",
     "version": "1.1.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/bkmap.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
