@@ -1,5 +1,5 @@
 import { View, Text } from "native-base";
-import MapView from "react-native-maps";
+import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import React, { useEffect, useState } from "react";
 import { TBuildingData } from "@/Localization/Type";
 import BuildingMarker from "./Marker";
@@ -54,6 +54,7 @@ const Map: React.FC<{}> = ({}) => {
           style={{ width: "100%", height: "100%" }}
           showsBuildings={false}
           ref={(ref) => setRef(ref)}
+          provider={PROVIDER_GOOGLE}
         >
           {data.map((point: TBuildingData) => {
             return <BuildingMarker position={point} key={point.id} />;

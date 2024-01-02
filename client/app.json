@@ -18,12 +18,20 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.hpcc.expo-redux-template"
+      "bundleIdentifier": "com.hpcc.expo-redux-template",
+      "config": {
+        "googleMapsApiKey": "AIzaSyCOzlYlRQiXHQ1Q9YrI5D5_tUuDdSoZEOY"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
+      },
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCOzlYlRQiXHQ1Q9YrI5D5_tUuDdSoZEOY"
+        }
       },
       "package": "com.hpcc.expo_redux_template"
     },
